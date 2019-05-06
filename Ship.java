@@ -6,6 +6,9 @@ public class Ship {
         for (int i = 0; i < shipPosition.length; i++){
             shipPosition[i].setPartOfShip();
         }
+    }
 
+    public Square[] squareList(){
+        
     }
 }
