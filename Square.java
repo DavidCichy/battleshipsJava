@@ -25,7 +25,7 @@ public class Square {
         if (isShipPart){
             return "X";
         } else {
-            return "~";
+            return " ";
          
         }
     }

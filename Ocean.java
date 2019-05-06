@@ -27,23 +27,47 @@ public class Ocean {
 
     }
     
-    private void printOcean(){
-        System.out.println("┌─┬─┬─┬─┬─┬─┬─┬─┬─┬─┐");
+    private String printOcean(){
+        String abc = String.format("%45s","    A   B   C   D   E   F   G   H   I   J  \n");
+        System.out.printf(abc);
+        //System.out.println("   A   B   C   D   E   F   G   H   I   J  ");
+        //System.out.print("  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐\n");
+        String line1 = String.format("%45s","  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐\n");
+        System.out.printf(line1);
+
+
         for (int x = 0; x<10; x++){
-            System.out.print("│");
+            String lips = String.valueOf(x+1);
+            String line2 = String.format("%2s", lips);
+            System.out.printf(line2);
+            System.out.print(" │ ");
+
+            //System.out.print(x+1+" " +"│ ");
             for (int y = 0; y<10; y++){
                 System.out.print(this.ocean[x][y].printingX());
-                System.out.print("│");;
+                System.out.print(" │ ");
             }
             System.out.println("");
             if (x<9) {
-                            System.out.println("├─┼─┼─┼─┼─┼─┼─┼─┼─┼─┤");}
+                String line3 = String.format("%45s","  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤\n");
+                System.out.printf(line3);}
+                            
+                           // System.out.println("  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤");}
         }
-        System.out.println("└─┴─┴─┴─┴─┴─┴─┴─┴─┴─┘");
+        String line4 = String.format("%45s","  └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘\n");
+        System.out.printf(line4);
 
+        //System.out.println("  └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘");
+        return "";
+    }
+    private String[] twoOcean(){
+        String [] table = new String[]{printOcean(), printOcean()};
+        //table {printOcean(), printOcean()};
+        return table;
     }
     public static void main(String[] args) {
         Ocean newOcean = new Ocean();
+        newOcean.twoOcean();
     }
 
 }
