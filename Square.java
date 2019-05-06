@@ -1,6 +1,5 @@
 import java.awt.List;
 
-import sun.security.util.Length;
 
 public class Square {
     private int x;
