@@ -8,7 +8,7 @@ public class Ship {
         }
     }
 
-    public Square[] squareList(){
-        
-    }
+    // public Square[] squareList(){
+    //     return shipPosition;
+    // }
 }

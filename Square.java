@@ -1,11 +1,18 @@
+import java.awt.List;
+
+import sun.security.util.Length;
+
 public class Square {
     private int x;
     private int y;
     boolean isShipPart;
 
     // isPartOfShip(Ship[] fleet){
+    //  List<Square> list = new List();
     //     for (int i = 0; i < fleet.length; i++){
-    //         fleet[i].
+        //      shipSize = listfleet[i].squareList().length();
+        //      for 
+    //          list += listfleet[i]
     //     }
     // }
 
