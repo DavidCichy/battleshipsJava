@@ -27,47 +27,45 @@ public class Ocean {
 
     }
     
-    private String printOcean(){
-        String abc = String.format("%45s","    A   B   C   D   E   F   G   H   I   J  \n");
+    private void printOcean(){
+        String abc = String.format("%45s","     A   B   C   D   E   F   G   H   I   J            A   B   C   D   E   F   G   H   I   J  \n");
         System.out.printf(abc);
-        //System.out.println("   A   B   C   D   E   F   G   H   I   J  ");
-        //System.out.print("  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐\n");
-        String line1 = String.format("%45s","  ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐\n");
+
+        String line1 = String.format("%45s","   ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐        ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐\n");
         System.out.printf(line1);
 
-
         for (int x = 0; x<10; x++){
-            String lips = String.valueOf(x+1);
-            String line2 = String.format("%2s", lips);
-            System.out.printf(line2);
-            System.out.print(" │ ");
+            String numb = String.valueOf(x+1);
+            String line2a = String.format("%2s", numb);
+            System.out.printf(line2a + " │ ");
 
-            //System.out.print(x+1+" " +"│ ");
             for (int y = 0; y<10; y++){
                 System.out.print(this.ocean[x][y].printingX());
                 System.out.print(" │ ");
             }
+
+            String line2b = String.format("%6s", numb);
+            System.out.printf(line2b + " │ ");
+
+            for (int y = 0; y<10; y++){
+                System.out.print(this.ocean[x][y].printingY());
+                System.out.print(" │ ");
+            }
+            
             System.out.println("");
             if (x<9) {
-                String line3 = String.format("%45s","  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤\n");
+                String line3 = String.format("%45s","   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤        ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤\n");
                 System.out.printf(line3);}
                             
-                           // System.out.println("  ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤");}
         }
-        String line4 = String.format("%45s","  └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘\n");
+        String line4 = String.format("%45s","   └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘        └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘\n");
         System.out.printf(line4);
-
-        //System.out.println("  └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘");
-        return "";
-    }
-    private String[] twoOcean(){
-        String [] table = new String[]{printOcean(), printOcean()};
-        //table {printOcean(), printOcean()};
-        return table;
+    
+    
     }
     public static void main(String[] args) {
         Ocean newOcean = new Ocean();
-        newOcean.twoOcean();
+     
     }
 
 }

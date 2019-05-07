@@ -30,6 +30,17 @@ public class Square {
         }
     }
 
+
+    public String printingY() {
+        if (isShipPart){
+            return "Y";
+        } else {
+            return " ";
+         
+        }
+    }
+
+
     public void setPartOfShip(){
         this.isShipPart = true;
     }
