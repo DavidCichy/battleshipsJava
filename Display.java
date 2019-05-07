@@ -14,7 +14,7 @@ public class Display{
             System.out.printf(line2a + " │ ");
 
             for (int y = 0; y<10; y++){
-                System.out.print(ownerOcean.ocean[x][y].showStatusToOwner());
+                System.out.print(ownerOcean.field[x][y].showStatusToOwner());
                 System.out.print(" │ ");
             }
 
@@ -22,7 +22,7 @@ public class Display{
             System.out.printf(line2b + " │ ");
 
             for (int y = 0; y<10; y++){
-                System.out.print(oponentOcean.ocean[x][y].showStatusToOponent());
+                System.out.print(oponentOcean.field[x][y].showStatusToOponent());
                 System.out.print(" │ ");
             }
             
