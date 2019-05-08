@@ -5,6 +5,22 @@ public class Square {
         this.state = "ocean";
     }
     
+    // public String getStatus(){
+    //     return this.state;
+    // }
+
+    public boolean isShip(){
+        // if (this.state == "ship") {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        return this.state.equals("ship");
+    }
+
+    public boolean isNeigbor(){
+        return this.state.equals("neighbor");
+    }
     public void makeShip(){
         if (this.state.equals("ocean")){
             this.state = "ship";
@@ -40,6 +56,8 @@ public class Square {
             return "×";
         }else if (this.state.equals("miss")){
             return "·";
+        }else if (this.state.equals("neighbor")){  // for tests only 
+            return "n";                            // to DELETE
         }
         else {
             return " ";
@@ -55,6 +73,8 @@ public class Square {
             return "×";
         }else if (this.state.equals("miss")){
             return "·";
+        }else if (this.state.equals("ship")){  // for tests only 
+            return "W";                            // to DELETE
         }
         else {
             return " ";

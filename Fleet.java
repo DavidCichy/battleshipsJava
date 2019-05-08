@@ -1,21 +1,283 @@
-public class Fleet { 
+import java.util.Random;
+
+public class Fleet {
     Ship[] fleet;
     Square[][] field; 
 
     public Fleet(Square[][] field){
         this.field = field;
-        Ship ship1 = new Ship(new Square[] {this.field[0][0], this.field[0][1], this.field[0][2]});
-        Ship ship2 = new Ship(new Square[] {this.field[0][8], this.field[0][9]});
-        Ship ship3 = new Ship(new Square[] {this.field[1][5], this.field[1][6]});
+        makeRandomFleet();
     }
 
 
-    // private void makeFleet(){
-    //     Ship ship4 = new Ship(new Square[] {this.field[2][1], this.field[3][1]});
-    //     Ship ship5 = new Ship(new Square[] {this.field[3][3], this.field[3][4], this.field[3][5], this.field[3][6]});
-    //     Ship ship6 = new Ship(new Square[] {this.field[4][9]});
-    //     Ship ship7 = new Ship(new Square[] {this.field[5][3], this.field[6][3], this.field[7][3], this.field[8][3]});
-    //     Ship ship8 = new Ship(new Square[] {this.field[7][0]});
-    //     Ship ship9 = new Ship(new Square[] {this.field[9][5]});
-    //     Ship ship0 = new Ship(new Square[] {this.field[7][8], this.field[8][8]});
-}
+    private void makeRandomFleet(){
+        makeCarrier();
+        makeBattleship();
+        makeCruiser();
+        makeSubmarine();
+        makeDestroyer();
+
+    }
+
+    private int generateRandomInt(){
+        Random random = new Random();
+        return random.nextInt(10);
+    }
+
+    private void makeCarrier(){
+        int axisX;
+        int axisY;
+
+        boolean isWorking = true;
+
+        while (isWorking) {
+            axisX = generateRandomInt();
+            axisY = generateRandomInt();
+
+            if (axisX+4 <10 && axisY%2!=0) {
+                Ship carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY], 
+                                                      this.field[axisX+3][axisY], this.field[axisX+4][axisY]});
+                markAsNeighbor();
+                isWorking =false;
+            } else if (axisY+4 <10 && axisX%2!=0) {
+                Ship carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2], 
+                                                      this.field[axisX][axisY+3], this.field[axisX][axisY+4]});
+                markAsNeighbor();
+                isWorking =false;
+            }  
+        }
+    }
+
+    private void makeBattleship(){
+        int axisX;
+        int axisY;
+
+        boolean isWorking = true;
+
+        while (isWorking) {
+            axisX = generateRandomInt();
+            axisY = generateRandomInt();
+
+            if (axisX+3 <10 && axisY%2!=0) {
+
+                if (!this.field[axisX][axisY].isShip() && !this.field[axisX][axisY].isNeigbor() &&
+                !this.field[axisX+1][axisY].isShip() && !this.field[axisX+1][axisY].isNeigbor() &&
+                !this.field[axisX+2][axisY].isShip() && !this.field[axisX+2][axisY].isNeigbor() &&
+                !this.field[axisX+3][axisY].isShip() && !this.field[axisX+3][axisY].isNeigbor() ) {
+
+                Ship battleship = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY], 
+                                                        this.field[axisX+3][axisY]});
+                markAsNeighbor();
+                isWorking =false;
+            } 
+            }
+            else if (axisY+3 <10 && axisX%2!=0) {
+
+                if (
+                !this.field[axisX][axisY+1].isShip() && !this.field[axisX][axisY+1].isNeigbor() &&
+                !this.field[axisX][axisY+2].isShip() && !this.field[axisX][axisY+2].isNeigbor() &&
+                !this.field[axisX][axisY+3].isShip() && !this.field[axisX][axisY+3].isNeigbor() ) {
+
+                Ship battleship = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2], 
+                                                      this.field[axisX][axisY+3]});
+                markAsNeighbor();
+                isWorking =false;
+            }  
+        }
+        } 
+    }
+        
+    private void makeCruiser(){
+        int axisX;
+        int axisY;
+
+        boolean isWorking = true;
+
+        while (isWorking) {
+            axisX = generateRandomInt();
+            axisY = generateRandomInt();
+
+            if (axisX+3 <10 && axisY%2!=0) {
+
+                if (!this.field[axisX][axisY].isShip() && !this.field[axisX][axisY].isNeigbor() &&
+                !this.field[axisX+1][axisY].isShip() && !this.field[axisX+1][axisY].isNeigbor() &&
+                !this.field[axisX+2][axisY].isShip() && !this.field[axisX+2][axisY].isNeigbor() ) {
+
+                Ship cruiser = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY]});
+                markAsNeighbor();
+                isWorking =false;
+            } 
+            }
+            else if (axisY+3 <10 && axisX%2!=0) {
+
+                if (
+                !this.field[axisX][axisY+1].isShip() && !this.field[axisX][axisY+1].isNeigbor() &&
+                !this.field[axisX][axisY+2].isShip() && !this.field[axisX][axisY+2].isNeigbor() ) {
+
+                Ship cruiser = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2]});
+                markAsNeighbor();
+                isWorking =false;
+            }  
+        }
+        } 
+    }
+
+    private void makeSubmarine(){
+        int axisX;
+        int axisY;
+
+        boolean isWorking = true;
+
+        while (isWorking) {
+            axisX = generateRandomInt();
+            axisY = generateRandomInt();
+
+            if (axisX+3 <10 && axisY%2!=0) {
+
+                if (!this.field[axisX][axisY].isShip() && !this.field[axisX][axisY].isNeigbor() &&
+                !this.field[axisX+1][axisY].isShip() && !this.field[axisX+1][axisY].isNeigbor() &&
+                !this.field[axisX+2][axisY].isShip() && !this.field[axisX+2][axisY].isNeigbor() ) {
+
+                Ship submarine = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY]});
+                markAsNeighbor();
+                isWorking =false;
+            } 
+            }
+            else if (axisY+3 <10 && axisX%2!=0) {
+
+                if (
+                !this.field[axisX][axisY+1].isShip() && !this.field[axisX][axisY+1].isNeigbor() &&
+                !this.field[axisX][axisY+2].isShip() && !this.field[axisX][axisY+2].isNeigbor() ) {
+
+                Ship submarine = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2]});
+                markAsNeighbor();
+                isWorking =false;
+            }  
+        }
+        } 
+    }
+
+    private void makeDestroyer(){
+        int axisX;
+        int axisY;
+
+        boolean isWorking = true;
+
+        while (isWorking) {
+            axisX = generateRandomInt();
+            axisY = generateRandomInt();
+
+            if (axisX+3 <10 && axisY%2!=0) {
+
+                if (!this.field[axisX][axisY].isShip() && !this.field[axisX][axisY].isNeigbor() &&
+                !this.field[axisX+1][axisY].isShip() && !this.field[axisX+1][axisY].isNeigbor() ) {
+
+                Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY]});
+                markAsNeighbor();
+                isWorking =false;
+            } 
+            }
+            else if (axisY+3 <10 && axisX%2!=0) {
+
+                if (
+                !this.field[axisX][axisY+1].isShip() && !this.field[axisX][axisY+1].isNeigbor()) {
+
+                Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2]});
+                markAsNeighbor();
+                isWorking =false;
+            }  
+        }
+        } 
+    }
+
+    private void markAsNeighbor(){
+        for (Integer x = 0; x<10; x++){
+            for (Integer y = 0; y<10; y++){
+                if (x==0 && y==0) {
+                    if (this.field[x+1][y+1].isShip() ) { // rog planszy
+                        this.field[x][y].makeNeighbor();
+                    }  
+                }
+                if (x==9 && y==9) {
+                    if (this.field[x-1][y-1].isShip() ) { // rog planszy
+                        this.field[x][y].makeNeighbor();
+                    }  
+                }
+                if (x==0 && y==9) {
+                    if (this.field[x+1][y-1].isShip() ) { // rog planszy
+                        this.field[x][y].makeNeighbor();
+                    }  
+                }
+                if (x==9 && y==0) {
+                    if (this.field[x-1][y+1].isShip() ) { // rog planszy
+                        this.field[x][y].makeNeighbor();
+                    }  
+                }
+                if (y>=0 && y<9) {
+                    if (
+                     this.field[x][y+1].isShip()) //lewa strona kazdego
+                    {
+                        this.field[x][y].makeNeighbor();}
+                } 
+                if (y>0 && y<=9) {
+                    if (   
+                     this.field[x][y-1].isShip()) // prawa strona kazdego
+                    {
+                        this.field[x][y].makeNeighbor();}
+                    } 
+                if (x>=0 && x<9) {
+                    if (
+                     this.field[x+1][y].isShip()) // góra kazdego
+                    {
+                        this.field[x][y].makeNeighbor();}
+                }
+                if (x>0 && x<=9) {
+                    if (
+                     this.field[x-1][y].isShip()) // dół kazdego
+                    {
+                        this.field[x][y].makeNeighbor();}
+                }
+                if (y>=1 && y<=8 && x>=1 && x<=8) {
+                    if (
+                     this.field[x+1][y-1].isShip()||
+                     this.field[x-1][y-1].isShip()||
+                     this.field[x-1][y+1].isShip()||
+                     this.field[x+1][y+1].isShip()) // rogi statku bez lini brzegowej
+                    {
+                        this.field[x][y].makeNeighbor();}
+                    }
+                if (y>=1 && y<=8 && x>=0 && x<=8) {
+                    if (
+                     this.field[x+1][y-1].isShip()||
+                     this.field[x+1][y+1].isShip()) // rogi statku na lini brzegowej
+                    {
+                        this.field[x][y].makeNeighbor();}
+                    }
+                if (y>=0 && y<=8 && x>=1 && x<=8) {
+                    if (
+                     this.field[x-1][y+1].isShip()||
+                     this.field[x+1][y+1].isShip()) // rogi statku na lini brzegowej
+                    {
+                        this.field[x][y].makeNeighbor();}
+                    }
+                if (y>=1 && y<=8 && x>=1 && x<=9) {
+                    if (
+                     this.field[x-1][y+1].isShip()||
+                     this.field[x-1][y-1].isShip()) // rogi statku na lini brzegowej
+                    {
+                        this.field[x][y].makeNeighbor();}
+                    }
+                if (y>=1 && y<=9 && x>=1 && x<=8) {
+                    if (
+                     this.field[x+1][y-1].isShip()||
+                     this.field[x-1][y-1].isShip()) // rogi statku na lini brzegowej
+                    {
+                        this.field[x][y].makeNeighbor();}
+                    }
+    
+                }
+                }
+                
+            }
+      
+    }

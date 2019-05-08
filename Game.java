@@ -16,6 +16,7 @@ public class Game {
         Fleet fleet1 = new Fleet(field1);
         Fleet fleet2 = new Fleet(field2);
         Display.showBoards(ocean1, ocean2);
+        Display.showBoards(ocean2, ocean1);
 
 
 
