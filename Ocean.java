@@ -12,7 +12,7 @@ public class Ocean {
 
     public boolean wasItShot(int x, int y){
         Square location = field[y][x];
-        return location.getState().equals("hit") || location.getState().equals("miss") || location.getState().equals("neighbour");
+        return location.getState().equals("hit") || location.getState().equals("miss") || location.getState().equals("neighbor");
         
 
 
