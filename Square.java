@@ -26,9 +26,13 @@ public class Square {
     }
     
     public void makeSunk(){
-        if (this.state.equals("ship")){
+        if (this.state.equals("hit")){
             this.state = "sunk";
         }
+    }
+
+    public boolean isHit(){
+        return this.state.equals("hit");
     }
 
     public String getState(){

@@ -5,6 +5,7 @@ public class Game {
     Square[][] field2;
     Player player1;
     Player player2;
+    boolean gameContinues;
     
     public Game() throws IOException {
         this.field1= new Square[10][10];
@@ -19,22 +20,32 @@ public class Game {
         Ocean ocean2 = new Ocean(field2);
         Fleet fleet1 = new Fleet(field1);
         Fleet fleet2 = new Fleet(field2);
-        this.player1 = new Player(ocean1, fleet1);
-        this.player2 = new Player(ocean2, fleet2);
-
-        playerRound(player1, player2);
-        playerRound(player2, player1);
-        playerRound(player1, player2);
-        playerRound(player2, player1);
-        playerRound(player1, player2);
-        playerRound(player2, player1);
+        this.player1 = new Player("Player 1", ocean1, fleet1);
+        this.player2 = new Player("Player 2", ocean2, fleet2);
+        this.gameContinues = true;
+        gameRound();
     }
     
+    private void gameRound() throws IOException {
+        while (gameContinues){
+        playerTurn(player1, player2);
+        updateState();
+        if(gameContinues){
+            playerTurn(player2, player1);
+            updateState();
+        }}
+    }
+
+    private void updateState(){
+        if (player1.checkIfLost() || player2.checkIfLost()){
+            this.gameContinues = false;
+        }
+    }
     
-    private void playerRound(Player player, Player oponent) throws IOException {
+    private void playerTurn(Player player, Player oponent) throws IOException {
         Scanner scan = new Scanner(System.in);
         Display.clearScreen();
-        System.out.println("Swap players and press any key to continue.");
+        System.out.println(player.getName() + " round. Press any key to continue.");
         System.in.read();
         Display.clearScreen();
         player.showBoard(oponent);

@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public class Ship {
     Square[] shipPosition;
+    // LinkedList<Square> shipNeighbor;
     boolean sunk;
 
     public Ship(Square[] shipPosition){
@@ -12,6 +13,18 @@ public class Ship {
         }
     }
 
+    public void updateState(){
+        this.sunk = true;
+        for (int i = 0; i < this.shipPosition.length; i++){
+            if (!this.shipPosition[i].isHit()){
+                this.sunk = false;
+            };}
+    }
+
+    public boolean isSunk(){
+        return this.sunk;
+    }
+
     public boolean checkIfLocationIsPartoOfShip(Square location){
         return Arrays.asList(this.shipPosition).contains(location);
     }
@@ -20,6 +33,7 @@ public class Ship {
         boolean isHit = checkIfLocationIsPartoOfShip(location);
         if (isHit){
             location.makeHit();
+            this.updateState();
         }
         return isHit;
     }

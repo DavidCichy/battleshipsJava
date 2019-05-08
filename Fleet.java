@@ -1,9 +1,11 @@
 public class Fleet { 
     Ship[] fleet;
     Square[][] field; 
+    boolean isDestroyed;
 
     public Fleet(Square[][] field){
         this.field = field;
+        this.isDestroyed = false;
         Ship ship1 = new Ship(new Square[] {this.field[0][0], this.field[0][1], this.field[0][2]});
         Ship ship2 = new Ship(new Square[] {this.field[0][8], this.field[0][9]});
         Ship ship3 = new Ship(new Square[] {this.field[1][5], this.field[1][6]});
@@ -14,10 +16,23 @@ public class Fleet {
         Square location = field[y][x];
         for (Ship s: fleet){
             if (s.tryToHitLocation(location)){
+                this.updateState();
                 return true;
             }
         }
         return false;
+    }
+
+    private void updateState(){
+        this.isDestroyed = true;
+        for (int i = 0; i < fleet.length; i++){
+            if (!fleet[i].isSunk()){
+                this.isDestroyed = false;
+            };}
+    }
+
+    public boolean isDestroyed(){
+        return this.isDestroyed;
     }
 
 
