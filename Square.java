@@ -20,7 +20,7 @@ public class Square {
     public void makeHit(){
         if (this.state.equals("ship")){
             this.state = "hit";
-        } else if (this.state.equals("ocean")) {
+        } else if (this.state.equals("ocean") || this.state.equals("neighbor")) {
             this.state = "miss";
         }
     }
