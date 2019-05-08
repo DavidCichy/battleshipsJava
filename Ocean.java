@@ -4,4 +4,9 @@ public class Ocean {
     public Ocean(Square[][] field){
         this.field = field;
     }
+
+    public void markSquare(int x, int y){
+        Square location = field[y][x];
+        location.makeHit();
+    }
 }
