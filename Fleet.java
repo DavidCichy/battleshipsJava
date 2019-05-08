@@ -3,6 +3,7 @@ import java.util.Random;
 public class Fleet {
     Ship[] fleet;
     Square[][] field; 
+    boolean isDestroyed;
 
     public Fleet(Square[][] field){
         this.field = field;
@@ -46,6 +47,30 @@ public class Fleet {
                 isWorking =false;
             }  
         }
+        this.isDestroyed = false;
+    }
+
+    public boolean tryToHitLocation(int x, int y){
+        Square location = field[y][x];
+        for (Ship s: this.fleet){
+            if (s.tryToHitLocation(location)){
+                this.updateState();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateState(){
+        this.isDestroyed = true;
+        for (int i = 0; i < fleet.length; i++){
+            if (!fleet[i].isSunk()){
+                this.isDestroyed = false;
+            };}
+    }
+
+    public boolean isDestroyed(){
+        return this.isDestroyed;
     }
 
     private void makeBattleship(){

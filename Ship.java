@@ -1,18 +1,41 @@
-import java.util.LinkedList;
-import java.util.List;
-
-
+import java.util.Arrays;
 
 public class Ship {
     Square[] shipPosition;
-    //List <Square> shipNeighbor;
+    // LinkedList<Square> shipNeighbor;
+    boolean sunk;
 
     public Ship(Square[] shipPosition){
-        //this.shipNeighbor = new LinkedList<>();
+        this.sunk = false;
         this.shipPosition = shipPosition;
         for (int i = 0; i < shipPosition.length; i++){
             shipPosition[i].makeShip();
         }
+    }
+
+    public void updateState(){
+        this.sunk = true;
+        for (int i = 0; i < this.shipPosition.length; i++){
+            if (!this.shipPosition[i].isHit()){
+                this.sunk = false;
+            };}
+    }
+
+    public boolean isSunk(){
+        return this.sunk;
+    }
+
+    public boolean checkIfLocationIsPartoOfShip(Square location){
+        return Arrays.asList(this.shipPosition).contains(location);
+    }
+
+    public boolean tryToHitLocation(Square location){
+        boolean isHit = checkIfLocationIsPartoOfShip(location);
+        if (isHit){
+            location.makeHit();
+            this.updateState();
+        }
+        return isHit;
     }
 
     // public Square[] squareList(){
