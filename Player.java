@@ -7,7 +7,7 @@ public class Player {
             this.playerFleet = playerFleet;
         }
 
-        public shotAtLocation(int x, int y, Player opponent){
+        public void shotAtLocation(int x, int y, Player opponent){
             opponent.recieveHit(x, y);
         }
 
