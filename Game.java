@@ -5,8 +5,11 @@ public class Game {
     Square[][] field2;
     Player player1;
     Player player2;
+    Ai ai1;
+    Ai ai2;
     
     public Game() throws IOException {
+        
         this.field1= new Square[10][10];
         this.field2= new Square[10][10];
         for (int x = 0; x<10; x++){
@@ -21,7 +24,11 @@ public class Game {
         Fleet fleet2 = new Fleet(field2);
         this.player1 = new Player(ocean1, fleet1);
         this.player2 = new Player(ocean2, fleet2);
+        this.ai1 = new Ai(ocean1, fleet1);
+        this.ai2 = new Ai(ocean2, fleet2);
 
+        //aiRound(ai1,ai2);
+        //aiRound(ai2,ai1);
         playerRound(player1, player2);
         playerRound(player2, player1);
         playerRound(player1, player2);
@@ -30,7 +37,20 @@ public class Game {
         playerRound(player2, player1);
     }
     
-    
+    private void aiRound(Ai ai, Ai oponent) throws IOException {
+        Display.clearScreen();
+        System.out.println("Swap players and press any key to continue.");
+        System.in.read();
+        Display.clearScreen();
+        ai.showBoard(oponent);
+        ai.easyAiShot(oponent);
+        Display.clearScreen();
+        ai.showBoard(oponent);
+        System.out.println("Press any key to continue");
+        System.in.read();
+
+    }
+
     private void playerRound(Player player, Player oponent) throws IOException {
         Scanner scan = new Scanner(System.in);
         Display.clearScreen();
@@ -45,7 +65,6 @@ public class Game {
         System.out.println("Press any key to continue");
         System.in.read();
     }
-
 
 
     private int convertXParameter(char x){
