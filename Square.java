@@ -30,6 +30,10 @@ public class Square {
             this.state = "sunk";
         }
     }
+
+    public String getState(){
+        return this.state;
+    }
     
     
     public String showStatusToOwner() {

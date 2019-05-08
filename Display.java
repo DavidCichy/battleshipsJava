@@ -1,5 +1,10 @@
 public class Display{
 
+   public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
 
     public static void showBoards(Ocean ownerOcean, Ocean oponentOcean){
         String abc = String.format("%45s","     A   B   C   D   E   F   G   H   I   J            A   B   C   D   E   F   G   H   I   J  \n");
