@@ -7,6 +7,17 @@ public class Fleet {
         Ship ship1 = new Ship(new Square[] {this.field[0][0], this.field[0][1], this.field[0][2]});
         Ship ship2 = new Ship(new Square[] {this.field[0][8], this.field[0][9]});
         Ship ship3 = new Ship(new Square[] {this.field[1][5], this.field[1][6]});
+        this.fleet = new Ship[] {ship1, ship2, ship3};
+    }
+
+    public boolean tryToHitLocation(int x, int y){
+        Square location = field[y][x];
+        for (Ship s: fleet){
+            if (s.tryToHitLocation(location)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
