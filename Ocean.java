@@ -9,4 +9,9 @@ public class Ocean {
         Square location = field[y][x];
         location.makeHit();
     }
+
+    public boolean wasItShot(int x, int y){
+        Square location = field[y][x];
+        return location.getState().equals("hit") || location.getState().equals("miss");
+    }
 }
