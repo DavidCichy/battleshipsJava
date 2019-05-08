@@ -7,6 +7,13 @@ public class Fleet {
 
     public Fleet(Square[][] field){
         this.field = field;
+        this.isDestroyed = false;
+        // Ship carrier = makeCarrier();
+        // Ship battleship =  makeBattleship();
+        // Ship cruiser =  makeCruiser();
+        // Ship submarine =  makeSubmarine();
+        // Ship destroyer =  makeDestroyer();
+        this.fleet = new Ship[5];// {carrier, battleship,cruiser, submarine,destroyer};
         makeRandomFleet();
     }
 
@@ -25,10 +32,10 @@ public class Fleet {
         return random.nextInt(10);
     }
 
-    private void makeCarrier(){
+    private Ship[] makeCarrier() {
         int axisX;
         int axisY;
-
+        Ship carrier;
         boolean isWorking = true;
 
         while (isWorking) {
@@ -36,18 +43,24 @@ public class Fleet {
             axisY = generateRandomInt();
 
             if (axisX+4 <10 && axisY%2!=0) {
-                Ship carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY], 
-                                                      this.field[axisX+3][axisY], this.field[axisX+4][axisY]});
+                carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY], 
+                                                      this.field[axisX+3][axisY], this.field[axisX+4][axisY]});                                          
                 markAsNeighbor();
+                this.fleet[0]=carrier;
                 isWorking =false;
+                //return carrier;
             } else if (axisY+4 <10 && axisX%2!=0) {
-                Ship carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2], 
+                carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2], 
                                                       this.field[axisX][axisY+3], this.field[axisX][axisY+4]});
                 markAsNeighbor();
+                this.fleet[0]=carrier;
                 isWorking =false;
+                //return carrier;
             }  
         }
-        this.isDestroyed = false;
+        //this.isDestroyed = false;
+        
+        return this.fleet;
     }
 
     public boolean tryToHitLocation(int x, int y){
@@ -73,7 +86,7 @@ public class Fleet {
         return this.isDestroyed;
     }
 
-    private void makeBattleship(){
+    private Ship[] makeBattleship() {
         int axisX;
         int axisY;
 
@@ -93,7 +106,9 @@ public class Fleet {
                 Ship battleship = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY], 
                                                         this.field[axisX+3][axisY]});
                 markAsNeighbor();
+                this.fleet[1]=battleship;
                 isWorking =false;
+                //return battleship;
             } 
             }
             else if (axisY+3 <10 && axisX%2!=0) {
@@ -106,13 +121,15 @@ public class Fleet {
                 Ship battleship = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2], 
                                                       this.field[axisX][axisY+3]});
                 markAsNeighbor();
+                this.fleet[1]=battleship;
                 isWorking =false;
+                // return battleship;
             }  
         }
-        } 
+        } return this.fleet;
     }
         
-    private void makeCruiser(){
+    private Ship[] makeCruiser() {
         int axisX;
         int axisY;
 
@@ -130,7 +147,9 @@ public class Fleet {
 
                 Ship cruiser = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY]});
                 markAsNeighbor();
+                this.fleet[2]=cruiser;
                 isWorking =false;
+                // return cruiser;
             } 
             }
             else if (axisY+3 <10 && axisX%2!=0) {
@@ -141,13 +160,15 @@ public class Fleet {
 
                 Ship cruiser = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2]});
                 markAsNeighbor();
+                this.fleet[2]=cruiser;
                 isWorking =false;
+                // return cruiser;
             }  
         }
-        } 
+        } return this.fleet;
     }
 
-    private void makeSubmarine(){
+    private Ship[] makeSubmarine() {
         int axisX;
         int axisY;
 
@@ -165,7 +186,9 @@ public class Fleet {
 
                 Ship submarine = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY]});
                 markAsNeighbor();
+                this.fleet[3]=submarine;
                 isWorking =false;
+                // return submarine;
             } 
             }
             else if (axisY+3 <10 && axisX%2!=0) {
@@ -176,13 +199,15 @@ public class Fleet {
 
                 Ship submarine = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2]});
                 markAsNeighbor();
+                this.fleet[3]=submarine;
                 isWorking =false;
+                // return submarine;
             }  
         }
-        } 
+        }return this.fleet;
     }
 
-    private void makeDestroyer(){
+    private Ship[] makeDestroyer() {
         int axisX;
         int axisY;
 
@@ -199,7 +224,9 @@ public class Fleet {
 
                 Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY]});
                 markAsNeighbor();
+                this.fleet[4]=destroyer;
                 isWorking =false;
+                // return destroyer;
             } 
             }
             else if (axisY+3 <10 && axisX%2!=0) {
@@ -209,10 +236,13 @@ public class Fleet {
 
                 Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2]});
                 markAsNeighbor();
+                this.fleet[4]=destroyer;
                 isWorking =false;
+                // return destroyer;
             }  
         }
-        } 
+        } return this.fleet;
+        
     }
 
     private void markAsNeighbor(){

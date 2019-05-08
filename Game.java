@@ -33,12 +33,12 @@ public class Game {
     
     private void gameRound() throws IOException {
         while (gameContinues){
-        //aiRound(ai1, ai2);
-        playerRound(player1, player2);
+        aiRound(ai1, ai2);
+        //playerRound(player1, player2);
         updateState();
         if(gameContinues){
-            //aiRound(ai2, ai1);
-            playerRound(player2, player1);
+            aiRound(ai2, ai1);
+            //playerRound(player2, player1);
             updateState();
         }}
     }
