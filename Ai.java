@@ -27,7 +27,7 @@ public class Ai extends Player{
         }}
     }
 
-    public void easyAiShot(Ai opponent){
+    public void easyAiShot(Player opponent){
       int x = (int )(Math.random() * 10);
       int y = (int )(Math.random() * 10);
       easyShot(x,y,opponent);
@@ -124,7 +124,7 @@ public class Ai extends Player{
 
     }
 
-    public void easyShot(int x, int y, Ai opponent){
+    public void easyShot(int x, int y, Player opponent){
       while (opponent.getOcean().wasItShot(x, y)==true){
         x = (int )(Math.random() * 10);
         y = (int )(Math.random() * 10);

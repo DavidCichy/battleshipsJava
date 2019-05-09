@@ -45,10 +45,10 @@ public class Game {
 
     private void gamePvAIEasy() throws IOException {
         while (this.gameContinues){
-            playerRound(this.player1, this.player2);
+            playerRound(this.player1, this.ai2);
             updateState();
             if(this.gameContinues){
-                playerRound(this.player2, this.player1);
+                aiRoundEasy(this.ai2, this.player1);
                 updateState();
             }
         }
@@ -93,7 +93,7 @@ public class Game {
     //     playerRound(player2, player1);
     // }
     
-    private void aiRoundEasy(Ai ai, Ai oponent) throws IOException {
+    private void aiRoundEasy(Ai ai, Player oponent) throws IOException {
         Display.clearScreen();
         System.out.println("Swap players and press any key to continue.");
         System.in.read();
@@ -182,10 +182,11 @@ public class Game {
                     break;
                 }
                 case 2: {
-                    gameSimulation();
+                    gamePvAIEasy();
                     break;
                 }
                 case 3: {
+                    gameSimulation();
                     
                     break;
                 }
