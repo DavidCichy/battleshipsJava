@@ -59,7 +59,6 @@ public class Fleet {
         if (yDistance == xDistance){
             distance--;
         }
-        System.out.println(String.valueOf(yDistance) + String.valueOf(xDistance) + String.valueOf(distance));
         return distance;
     }
 
