@@ -1,8 +1,12 @@
 public class Square {
     private String state;
+    private int x;
+    private int y;
     //(ship, ocean, miss, hit, neighbor, sank)
     public Square(int x, int y){
         this.state = "ocean";
+        this.x = x;
+        this.y = y;
     }
     
     // public String getStatus(){
@@ -14,6 +18,10 @@ public class Square {
         if (this.state.equals("ocean")){
             this.state = "ship";
         }
+    }
+
+    public int[] getXY(){
+        return new int[] {this.x, this.y};
     }
     
     public void makeNeighbor(){
@@ -33,6 +41,12 @@ public class Square {
     public void makeSunk(){
         if (this.state.equals("hit")){
             this.state = "sunk";
+        }
+    }
+    
+    public void makeMissFromNeighbor(){
+        if (this.isNeigbor()){
+            this.state = "miss";
         }
     }
     
@@ -74,8 +88,8 @@ public class Square {
             return "▒";
         }else if (this.isMiss()){
             return "Ø";
-        // }else if (this.state.equals("neighbor")){  // for tests only 
-        //     return "n";                            // to DELETE
+        }else if (this.state.equals("neighbor")){  // for tests only 
+            return "n";                            // to DELETE
         }
         else {
             return " ";

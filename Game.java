@@ -205,7 +205,7 @@ public class Game {
        
 
         while (isRunning) {
-                Display.clearScreen();
+                // Display.clearScreen();
                 Display.showMenu().forEach(System.out::println);
                 
                 System.out.println("Choose an option");

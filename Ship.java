@@ -1,8 +1,9 @@
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Ship {
     Square[] shipPosition;
-    // LinkedList<Square> shipNeighbor;
+    LinkedList<Square> shipNeighbor;
     boolean sunk;
 
     public Ship(Square[] shipPosition){
@@ -10,6 +11,17 @@ public class Ship {
         this.shipPosition = shipPosition;
         for (int i = 0; i < shipPosition.length; i++){
             shipPosition[i].makeShip();
+        }
+    }
+
+    public Square[] getPosition(){
+        return this.shipPosition;
+    }
+
+    public void addNeighbors(LinkedList neighbor){
+        this.shipNeighbor = neighbor;
+        for (int i = 0; i < this.shipNeighbor.size(); i++){
+            shipNeighbor.get(i).makeNeighbor();
         }
     }
 
@@ -21,11 +33,13 @@ public class Ship {
             }
         }
         if (this.sunk){
-            for (int j = 0; j < shipPosition.length; j++){
-                shipPosition[j].makeSunk();
+            for (int j = 0; j < this.shipPosition.length; j++){
+                this.shipPosition[j].makeSunk();
             }
-        };
-    }
+            for (int i = 0; i < this.shipNeighbor.size(); i++){
+                this.shipNeighbor.get(i).makeMissFromNeighbor();
+            }
+    }}
 
     public boolean isSunk(){
         return this.sunk;
