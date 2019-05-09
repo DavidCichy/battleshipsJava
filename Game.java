@@ -78,13 +78,13 @@ public class Game {
 
     private void gameSimulation() throws IOException {
         while (this.gameContinues){
-            aiRoundEasy(this.ai1, this.ai2);
-            //aiRoundMedium(this.ai1, this.ai2);        
+            //aiRoundEasy(this.ai1, this.ai2);
+            aiRoundMedium(this.ai1, this.ai2);        
             //playerRound(player1, player2);
             updateState();
             if(this.gameContinues){
-                aiRoundEasy(this.ai2, this.ai1);
-                //aiRoundMedium(this.ai2, this.ai1);            
+                //aiRoundEasy(this.ai2, this.ai1);
+                aiRoundMedium(this.ai2, this.ai1);            
                 //playerRound(player2, player1);
                 updateState();
             }

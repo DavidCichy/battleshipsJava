@@ -43,7 +43,7 @@ public class Ai extends Player{
     }
 
     private String showStatus(int xMemory, int yMemory) {
-      String status = shotsTable[xMemory][yMemory];
+      String status = this.shotsTable[yMemory][xMemory];
       return status;
     }
 
@@ -51,72 +51,77 @@ public class Ai extends Player{
       for (int x = 0; x<10; x++){
         for (int y = 0; y<10; y++){
           if (opponent.getOcean().stateOfSquare(x,y).equals("sunk")){
-          this.shotsTable[x][y] = this.sunk;}
+          this.shotsTable[y][x] = this.miss;}
         }}
     }
 
     public void partOfMediumAi(int x, int y, Player opponent){
       if (opponent.getOcean().stateOfSquare(x,y).equals("hit")){
-        this.shotsTable[x][y] = hit;}
+        this.shotsTable[y][x] = hit;}
       else if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
-        this.shotsTable[x][y] = miss;}
+        this.shotsTable[y][x] = miss;}
+        markAsNotShootThere(opponent);
+        //makeSunk(opponent);
         markAsNeighborQuartersNearHit();
-        makeSunk(opponent);
-        markAsNeighborIfSunk();
         this.xMemory = x;
         this.yMemory = y;
     }
 
     public void mediumAiShot(Player opponent){
-//      if (showStatus(xMemory,yMemory).equals(hit)){
-//        if(xMemory >0 && xMemory <9 && yMemory>0 && yMemory<9) {
-//            int x = xMemory;
-//            int y = yMemory;
-//          if (opponent.getOcean().wasItShot(x, y+1)==false){
-//            x += 0;
-//            y += 1; //w prawo
-//            shotAtLocation(x, y, opponent);
-//            partOfMediumAi(x,y,opponent);
-//          } else if (opponent.getOcean().wasItShot(x, y-1)==false) {
-//            x += 0;
-//            y -= 1; //w lewo
-//            shotAtLocation(x, y, opponent);
-//            partOfMediumAi(x,y,opponent);
-//          } else if (opponent.getOcean().wasItShot(x+1, y)==false) {
-//            x += 1;
-//            y += 0; //w dół
-//            shotAtLocation(x, y, opponent);
-//            partOfMediumAi(x,y,opponent);
-//          } else if (opponent.getOcean().wasItShot(x-1, y)==false) {
-//            x -= 1; //w górę
-//            y += 0;  
-//            shotAtLocation(x, y, opponent);
-//            partOfMediumAi(x,y,opponent);
-//          }
-//        }
+  //    if (xMemory >0 && xMemory <9 && yMemory>0 && yMemory<9 || showStatus(xMemory,yMemory).equals(hit)){
+  //     
+  //          int x = xMemory;
+  //          int y = yMemory;
+  //        if (opponent.getOcean().wasItShot(x, y+1)==false){
+  //          x += 0;
+  //          y += 1; //w prawo
+  //          //shotAtLocation(x, y, opponent);
+  //          easyShot(x,y,opponent);
+  //          partOfMediumAi(x,y,opponent);
+  //        } else if (opponent.getOcean().wasItShot(x, y-1)==false) {
+  //          x += 0;
+  //          y -= 1; //w lewo
+  //          //shotAtLocation(x, y, opponent);
+  //          easyShot(x,y,opponent);
+  //          partOfMediumAi(x,y,opponent);
+  //        } else if (opponent.getOcean().wasItShot(x+1, y)==false) {
+  //          x += 1;
+  //          y += 0; //w dół
+  //          //shotAtLocation(x, y, opponent);
+  //          easyShot(x,y,opponent);
+  //          partOfMediumAi(x,y,opponent);
+  //        } else if (opponent.getOcean().wasItShot(x-1, y)==false) {
+  //          x -= 1; //w górę
+  //          y += 0;  
+  //          //shotAtLocation(x, y, opponent);
+  //          easyShot(x,y,opponent);
+  //          partOfMediumAi(x,y,opponent);
+  //        }
+  //      
 //
-//      } else {
+  //    } else {
 
 
 
         int x = (int )(Math.random() * 10);
         int y = (int )(Math.random() * 10);
-      while (!this.shotsTable[x][y].equals(noShot)){
+      while (!this.shotsTable[y][x].equals(noShot)){
         x = (int )(Math.random() * 10);
         y = (int )(Math.random() * 10);
       }
         shotAtLocation(x, y, opponent);
         if (opponent.getOcean().stateOfSquare(x,y).equals("hit")){
-          this.shotsTable[x][y] = hit;}
+          this.shotsTable[y][x] = hit;}
         else if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
-          this.shotsTable[x][y] = miss;}
+          this.shotsTable[y][x] = miss;}
+          markAsNotShootThere(opponent);
+          //makeSunk(opponent);
           markAsNeighborQuartersNearHit();
-          makeSunk(opponent);
-          markAsNeighborIfSunk();
+          shotToQuartersAfterHit(opponent);
           this.xMemory = x;
           this.yMemory = y;
 
-//        }
+    //    }
     }
 
 
@@ -142,129 +147,51 @@ public class Ai extends Player{
          this.shotsTable[x-1][y+1].equals(this.hit)||
          this.shotsTable[x+1][y+1].equals(this.hit)) // rogi statku bez lini brzegowej
         {
-            this.shotsTable[x][y]=neighbour;}
+            this.shotsTable[x][y]=this.neighbour;}
         }
     if (y>=1 && y<=8 && x>=0 && x<=8) {
         if (
          this.shotsTable[x+1][y-1].equals(this.hit)||
          this.shotsTable[x+1][y+1].equals(this.hit)) // rogi statku na lini brzegowej
         {
-            this.shotsTable[x][y]=neighbour;}
+            this.shotsTable[x][y]=this.neighbour;}
         }
     if (y>=0 && y<=8 && x>=1 && x<=8) {
         if (
          this.shotsTable[x-1][y+1].equals(this.hit)||
          this.shotsTable[x+1][y+1].equals(this.hit)) // rogi statku na lini brzegowej
         {
-            this.shotsTable[x][y]=neighbour;}
+            this.shotsTable[x][y]=this.neighbour;}
         }
     if (y>=1 && y<=8 && x>=1 && x<=9) {
         if (
          this.shotsTable[x-1][y+1].equals(this.hit)||
          this.shotsTable[x-1][y-1].equals(this.hit)) // rogi statku na lini brzegowej
         {
-            this.shotsTable[x][y]=neighbour;}
+            this.shotsTable[x][y]=this.neighbour;}
         }
     if (y>=1 && y<=9 && x>=1 && x<=8) {
         if (
          this.shotsTable[x+1][y-1].equals(this.hit)||
          this.shotsTable[x-1][y-1].equals(this.hit)) // rogi statku na lini brzegowej
         {
-            this.shotsTable[x][y]=neighbour;}
+            this.shotsTable[x][y]=this.neighbour;}
         }
       }}
     }
 
 
-    private void markAsNeighborIfSunk(){
+    private void markAsNotShootThere(Player opponent){
       for (Integer x = 0; x<10; x++){
           for (Integer y = 0; y<10; y++){
-              if (x==0 && y==0) {
-                  if (this.shotsTable[x+1][y+1].equals(this.sunk) ) { // rog planszy
-                      this.shotsTable[x][y]=neighbour;
-                  }  
-              }
-              if (x==9 && y==9) {
-                  if (this.shotsTable[x-1][y-1].equals(this.sunk) ) { // rog planszy
-                      this.shotsTable[x][y]=neighbour;
-                  }  
-              }
-              if (x==0 && y==9) {
-                  if (this.shotsTable[x+1][y-1].equals(this.sunk) ) { // rog planszy
-                      this.shotsTable[x][y]=neighbour;
-                  }  
-              }
-              if (x==9 && y==0) {
-                  if (this.shotsTable[x-1][y+1].equals(this.sunk) ) { // rog planszy
-                      this.shotsTable[x][y]=neighbour;
-                  }  
-              }
-              if (y>=0 && y<9) {
-                  if (
-                   this.shotsTable[x][y+1].equals(this.sunk)) //lewa strona kazdego
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-              } 
-              if (y>0 && y<=9) {
-                  if (   
-                   this.shotsTable[x][y-1].equals(this.sunk)) // prawa strona kazdego
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-                  } 
-              if (x>=0 && x<9) {
-                  if (
-                   this.shotsTable[x+1][y].equals(this.sunk)) // góra kazdego
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-              }
-              if (x>0 && x<=9) {
-                  if (
-                   this.shotsTable[x-1][y].equals(this.sunk)) // dół kazdego
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-              }
-              if (y>=1 && y<=8 && x>=1 && x<=8) {
-                  if (
-                   this.shotsTable[x+1][y-1].equals(this.sunk)||
-                   this.shotsTable[x-1][y-1].equals(this.sunk)||
-                   this.shotsTable[x-1][y+1].equals(this.sunk)||
-                   this.shotsTable[x+1][y+1].equals(this.sunk)) // rogi statku bez lini brzegowej
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-                  }
-              if (y>=1 && y<=8 && x>=0 && x<=8) {
-                  if (
-                   this.shotsTable[x+1][y-1].equals(this.sunk)||
-                   this.shotsTable[x+1][y+1].equals(this.sunk)) // rogi statku na lini brzegowej
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-                  }
-              if (y>=0 && y<=8 && x>=1 && x<=8) {
-                  if (
-                   this.shotsTable[x-1][y+1].equals(this.sunk)||
-                   this.shotsTable[x+1][y+1].equals(this.sunk)) // rogi statku na lini brzegowej
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-                  }
-              if (y>=1 && y<=8 && x>=1 && x<=9) {
-                  if (
-                   this.shotsTable[x-1][y+1].equals(this.sunk)||
-                   this.shotsTable[x-1][y-1].equals(this.sunk)) // rogi statku na lini brzegowej
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-                  }
-              if (y>=1 && y<=9 && x>=1 && x<=8) {
-                  if (
-                   this.shotsTable[x+1][y-1].equals(this.sunk)||
-                   this.shotsTable[x-1][y-1].equals(this.sunk)) // rogi statku na lini brzegowej
-                  {
-                      this.shotsTable[x][y]=neighbour;}
-                  }
-  
-              }
-              }
-              
+            if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
+            this.shotsTable[y][x]=miss;
+          } else if(opponent.getOcean().stateOfSquare(x,y).equals("sunk")){
+            this.shotsTable[y][x]=miss;
           }
+        }
+      }
+    }
       
 public static void showAiShotsTable(String[][] shotsTable, String[][] shotsTablee){
         String abc = String.format("%45s","     A   B   C   D   E   F   G   H   I   J            A   B   C   D   E   F   G   H   I   J  \n");
@@ -301,8 +228,15 @@ public static void showAiShotsTable(String[][] shotsTable, String[][] shotsTable
         System.out.printf(line4);
 }
 
-    private void markAsNeighborAfterHit(){
+    private void shotToQuartersAfterHit(Player opponent){
+      for (Integer x = 0; x<10; x++){
+        for (Integer y = 0; y<10; y++){
+          if(this.shotsTable[y][x]==neighbour){
+          opponent.getOcean().markSquare(x, y);
+        } 
+    }
   }
+}
 
 //  public static String[] addNewShotToMemory (int[][] lastFiveShots, int character) {  
 //    int[][] newList = new int[lastFiveShots.length + 1];

@@ -18,7 +18,7 @@ public class Ship {
         return this.shipPosition;
     }
 
-    public void addNeighbors(LinkedList neighbor){
+    public void addNeighbors(LinkedList<Square> neighbor){
         this.shipNeighbor = neighbor;
         for (int i = 0; i < this.shipNeighbor.size(); i++){
             shipNeighbor.get(i).makeNeighbor();
