@@ -23,32 +23,56 @@ public class Game {
         Ocean ocean2 = new Ocean(field2);
         Fleet fleet1 = new Fleet(field1);
         Fleet fleet2 = new Fleet(field2);
+        this.gameContinues = true;
         this.player1 = new Player("Player 1", ocean1, fleet1);
         this.player2 = new Player("Player 2", ocean2, fleet2);
         this.ai1 = new Ai("AI 1", ocean1, fleet1);
         this.ai2 = new Ai("AI 2", ocean2, fleet2);
-        this.gameContinues = true;
         gameRun();
+        
     }
-    
-    private void gameRound() throws IOException {
-        while (gameContinues){
-            aiRoundEasy(ai1, ai2);
+
+    private void gamePvP() throws IOException {
+        while (this.gameContinues){
+            playerRound(this.player1, this.player2);
+            updateState();
+            if(this.gameContinues){
+                playerRound(this.player2, this.player1);
+                updateState();
+            }
+        }
+    }
+
+    private void gamePvAIEasy() throws IOException {
+        while (this.gameContinues){
+            playerRound(this.player1, this.player2);
+            updateState();
+            if(this.gameContinues){
+                playerRound(this.player2, this.player1);
+                updateState();
+            }
+        }
+    }
+
+    private void gameSimulation() throws IOException {
+        while (this.gameContinues){
+            aiRoundEasy(this.ai1, this.ai2);
             //aiRoundMedium(ai1, ai2);        
             //playerRound(player1, player2);
-        updateState();
-        if(gameContinues){
-            aiRoundEasy(ai2, ai1);
-            //aiRoundMedium(ai2, ai1);            
-            //playerRound(player2, player1);
             updateState();
-        }}
+            if(this.gameContinues){
+                aiRoundEasy(this.ai2, this.ai1);
+                //aiRoundMedium(ai2, ai1);            
+                //playerRound(player2, player1);
+                updateState();
+            }
+        }
     }
 
     private void updateState(){
-        if (player1.checkIfLost() || player2.checkIfLost()){
+        if (this.player1.checkIfLost() || this.player2.checkIfLost()){
             this.gameContinues = false;
-        }else if (ai1.checkIfLost() || ai2.checkIfLost()){
+        } else if (this.ai1.checkIfLost() || this.ai2.checkIfLost()){
             this.gameContinues = false;
         }
     }
@@ -154,11 +178,11 @@ public class Game {
                 
                 switch (scan.nextInt()) {
                 case 1: {
-                    gameRound();
+                    gamePvP();
                     break;
                 }
                 case 2: {
-                    
+                    gameSimulation();
                     break;
                 }
                 case 3: {

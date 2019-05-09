@@ -14,6 +14,9 @@ public class Fleet {
         // Ship submarine =  makeSubmarine();
         // Ship destroyer =  makeDestroyer();
         this.fleet = new Ship[5];// {carrier, battleship,cruiser, submarine,destroyer};
+        // Ship battleship = new Ship(new Square[] {this.field[0][0], this.field[1][0], this.field[2][0], 
+        //     this.field[3][0]});
+        // this.fleet = new Ship[] {battleship};
         makeRandomFleet();
     }
 

@@ -9,18 +9,7 @@ public class Square {
     //     return this.state;
     // }
 
-    public boolean isShip(){
-        // if (this.state == "ship") {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
-        return this.state.equals("ship");
-    }
-
-    public boolean isNeigbor(){
-        return this.state.equals("neighbor");
-    }
+    
     public void makeShip(){
         if (this.state.equals("ocean")){
             this.state = "ship";
@@ -46,9 +35,28 @@ public class Square {
             this.state = "sunk";
         }
     }
-
+    
+    public boolean isNeigbor(){
+        return this.state.equals("neighbor");
+    }
+    
+    public boolean isShip(){
+        return this.state.equals("ship");
+    }
     public boolean isHit(){
         return this.state.equals("hit");
+    }
+    
+    public boolean isSunk(){
+        return this.state.equals("sunk");
+    }
+    
+    public boolean isMiss(){
+        return this.state.equals("miss");
+    }
+
+    public boolean isOcean(){
+        return this.state.equals("ocean");
     }
 
     public String getState(){
@@ -58,11 +66,13 @@ public class Square {
     
     public String showStatusToOwner() {
         //(ship,hit,sank, ocean, miss,  neighbor, )
-        if (this.state.equals("ship")){
+        if (this.isShip()){
             return "■";
-        } else if (this.state.equals("hit")){
+        } else if (this.isHit()){
             return "×";
-        }else if (this.state.equals("miss")){
+        } else if (this.isSunk()){
+            return "▒";
+        }else if (this.isMiss()){
             return "Ø";
         // }else if (this.state.equals("neighbor")){  // for tests only 
         //     return "n";                            // to DELETE
@@ -75,11 +85,11 @@ public class Square {
 
     public String showStatusToOponent() {
         //(ship,hit,sunk, ocean, miss,  neighbor, )
-        if (this.state.equals("sunk")){
-            return "■";
-        } else if (this.state.equals("hit")){
+        if (this.isSunk()){
+            return "▒";
+        } else if (this.isHit()){
             return "×";
-        }else if (this.state.equals("miss")){
+        }else if (this.isMiss()){
             return "Ø";
         // }else if (this.state.equals("ship")){  // for tests only 
             // return "W";                            // to DELETE
