@@ -12,9 +12,16 @@ public class Ocean {
 
     public boolean wasItShot(int x, int y){
         Square location = field[y][x];
-        return location.getState().equals("hit") || location.getState().equals("miss") || location.getState().equals("neighbor");
-        
+        return location.getState().equals("hit") || location.getState().equals("miss");
+        //return location.getState().equals("hit") || location.getState().equals("miss") || location.getState().equals("neighbor") || location.getState().equals("sunk");
+
 
 
     }
+
+    public String stateOfSquare(int x, int y){
+        Square location = field[y][x];
+        return location.getState();
+    }
+
 }

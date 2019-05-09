@@ -33,11 +33,13 @@ public class Game {
     
     private void gameRound() throws IOException {
         while (gameContinues){
-        aiRound(ai1, ai2);
-        //playerRound(player1, player2);
+            aiRoundEasy(ai1, ai2);
+            //aiRoundMedium(ai1, ai2);        
+            //playerRound(player1, player2);
         updateState();
         if(gameContinues){
-            aiRound(ai2, ai1);
+            aiRoundEasy(ai2, ai1);
+            //aiRoundMedium(ai2, ai1);            
             //playerRound(player2, player1);
             updateState();
         }}
@@ -45,6 +47,8 @@ public class Game {
 
     private void updateState(){
         if (player1.checkIfLost() || player2.checkIfLost()){
+            this.gameContinues = false;
+        }else if (ai1.checkIfLost() || ai2.checkIfLost()){
             this.gameContinues = false;
         }
     }
@@ -55,8 +59,8 @@ public class Game {
     //     // this.ai1 = new Ai(ocean1, fleet1);
     //     // this.ai2 = new Ai(ocean2, fleet2);
 
-    //     //aiRound(ai1,ai2);
-    //     //aiRound(ai2,ai1);
+    //     //aiRoundEasy(ai1,ai2);
+    //     //aiRoundEasy(ai2,ai1);
     //     playerRound(player1, player2);
     //     playerRound(player2, player1);
     //     playerRound(player1, player2);
@@ -65,7 +69,7 @@ public class Game {
     //     playerRound(player2, player1);
     // }
     
-    private void aiRound(Ai ai, Ai oponent) throws IOException {
+    private void aiRoundEasy(Ai ai, Ai oponent) throws IOException {
         Display.clearScreen();
         System.out.println("Swap players and press any key to continue.");
         System.in.read();
@@ -76,6 +80,26 @@ public class Game {
         ai.showBoard(oponent);
         System.out.println("Press any key to continue");
         System.in.read();
+
+    }
+
+    private void aiRoundMedium(Ai ai, Ai oponent) throws IOException {
+        Display.clearScreen();
+        System.out.println("Swap players and press any key to continue.");
+        System.in.read();
+        Display.clearScreen();
+        ai.showBoard(oponent);
+        ai.mediumAiShot(oponent);
+        ai.showAiShotsTable(ai.shotsTable, oponent.shotsTable);
+        Display.clearScreen();
+        ai.showBoard(oponent);
+        ai.showAiShotsTable(ai.shotsTable, oponent.shotsTable);
+        System.out.println("Press any key to continue");
+        System.in.read();
+
+    }
+
+    private void aiRoundHard(Ai ai, Ai oponent) throws IOException {
 
     }
 
