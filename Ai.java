@@ -47,7 +47,7 @@ public class Ai extends Player{
       return status;
     }
 
-    private void makeSunk (Ai opponent) {
+    private void makeSunk (Player opponent) {
       for (int x = 0; x<10; x++){
         for (int y = 0; y<10; y++){
           if (opponent.getOcean().stateOfSquare(x,y).equals("sunk")){
@@ -55,7 +55,7 @@ public class Ai extends Player{
         }}
     }
 
-    public void partOfMediumAi(int x, int y, Ai opponent){
+    public void partOfMediumAi(int x, int y, Player opponent){
       if (opponent.getOcean().stateOfSquare(x,y).equals("hit")){
         this.shotsTable[x][y] = hit;}
       else if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
@@ -67,7 +67,7 @@ public class Ai extends Player{
         this.yMemory = y;
     }
 
-    public void mediumAiShot(Ai opponent){
+    public void mediumAiShot(Player opponent){
 //      if (showStatus(xMemory,yMemory).equals(hit)){
 //        if(xMemory >0 && xMemory <9 && yMemory>0 && yMemory<9) {
 //            int x = xMemory;
@@ -120,7 +120,7 @@ public class Ai extends Player{
     }
 
 
-    public void hardAiShot(Ai opponent){
+    public void hardAiShot(Player opponent){
 
     }
 

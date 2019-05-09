@@ -48,7 +48,29 @@ public class Game {
             playerRound(this.player1, this.ai2);
             updateState();
             if(this.gameContinues){
-                aiRoundEasy(this.ai2, this.player1);
+                aiRoundEasy(this.ai2, this.player1,false);
+                updateState();
+            }
+        }
+    }
+
+    private void gamePvAIMedium() throws IOException {
+        while (this.gameContinues){
+            playerRound(this.player1, this.ai2);
+            updateState();
+            if(this.gameContinues){
+                aiRoundMedium(this.ai2, this.player1,false);
+                updateState();
+            }
+        }
+    }
+
+    private void gamePvAIHard() throws IOException {
+        while (this.gameContinues){
+            playerRound(this.player1, this.ai2);
+            updateState();
+            if(this.gameContinues){
+                aiRoundHard(this.ai2, this.player1,false);
                 updateState();
             }
         }
@@ -57,12 +79,12 @@ public class Game {
     private void gameSimulation() throws IOException {
         while (this.gameContinues){
             aiRoundEasy(this.ai1, this.ai2);
-            //aiRoundMedium(ai1, ai2);        
+            //aiRoundMedium(this.ai1, this.ai2);        
             //playerRound(player1, player2);
             updateState();
             if(this.gameContinues){
                 aiRoundEasy(this.ai2, this.ai1);
-                //aiRoundMedium(ai2, ai1);            
+                //aiRoundMedium(this.ai2, this.ai1);            
                 //playerRound(player2, player1);
                 updateState();
             }
@@ -92,38 +114,51 @@ public class Game {
     //     playerRound(player1, player2);
     //     playerRound(player2, player1);
     // }
-    
     private void aiRoundEasy(Ai ai, Player oponent) throws IOException {
+        aiRoundEasy(ai, oponent, true);
+    }
+
+    private void aiRoundMedium(Ai ai, Player oponent) throws IOException {
+        aiRoundMedium(ai, oponent, true);
+    }
+    
+    private void aiRoundEasy(Ai ai, Player oponent, boolean showShips) throws IOException {
         Display.clearScreen();
-        System.out.println("Swap players and press any key to continue.");
+        System.out.println("AI round.");
         System.in.read();
         Display.clearScreen();
-        ai.showBoard(oponent);
+        if(showShips){
+        ai.showBoard(oponent);    }
         ai.easyAiShot(oponent);
         Display.clearScreen();
-        ai.showBoard(oponent);
+        if(showShips){
+            ai.showBoard(oponent);    }
         System.out.println("Press any key to continue");
         System.in.read();
 
     }
 
-    private void aiRoundMedium(Ai ai, Ai oponent) throws IOException {
+    private void aiRoundMedium(Ai ai, Player oponent, boolean showShips) throws IOException {
         Display.clearScreen();
-        System.out.println("Swap players and press any key to continue.");
+        System.out.println("AI round.");
         System.in.read();
         Display.clearScreen();
-        ai.showBoard(oponent);
+        if(showShips){
+        ai.showBoard(oponent);}
         ai.mediumAiShot(oponent);
-        ai.showAiShotsTable(ai.shotsTable, oponent.shotsTable);
+        if(showShips){
+        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
         Display.clearScreen();
-        ai.showBoard(oponent);
-        ai.showAiShotsTable(ai.shotsTable, oponent.shotsTable);
+        if(showShips){
+        ai.showBoard(oponent);}
+        if(showShips){
+        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
         System.out.println("Press any key to continue");
         System.in.read();
 
     }
 
-    private void aiRoundHard(Ai ai, Ai oponent) throws IOException {
+    private void aiRoundHard(Ai ai, Player oponent, boolean showShips) throws IOException {
 
     }
 
@@ -186,15 +221,15 @@ public class Game {
                     break;
                 }
                 case 3: {
-                    gameSimulation();
-                    
+                    gamePvAIMedium();
                     break;
                 }
                 case 4: {
-                    
+                    gamePvAIHard();
                     break;
                 }
                 case 5: {
+                    gameSimulation();
                     
                     break;
                 }
