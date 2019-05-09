@@ -28,7 +28,7 @@ public class Game {
         this.ai1 = new Ai("AI 1", ocean1, fleet1);
         this.ai2 = new Ai("AI 2", ocean2, fleet2);
         this.gameContinues = true;
-        gameRound();
+        gameRun();
     }
     
     private void gameRound() throws IOException {
@@ -139,4 +139,76 @@ public class Game {
         return new int[] {x,y};
     }
 
-}
+    private void gameRun() throws IOException {
+        Scanner scan = new Scanner(System.in);
+
+        boolean isRunning = true;
+       
+
+        while (isRunning) {
+                Display.clearScreen();
+                Display.showMenu().forEach(System.out::println);
+                
+                System.out.println("Choose an option");
+
+                
+                switch (scan.nextInt()) {
+                case 1: {
+                    gameRound();
+                    break;
+                }
+                case 2: {
+                    
+                    break;
+                }
+                case 3: {
+                    
+                    break;
+                }
+                case 4: {
+                    
+                    break;
+                }
+                case 5: {
+                    
+                    break;
+                }
+                case 6: {
+                
+                    break;
+                }
+                case 7: {
+                    
+                    break;
+                }
+                case 8: {
+                    
+                    break;
+                }
+
+                case 9: {
+                    
+                    break;
+                }
+                case 10: {
+
+                    break;
+                }
+
+                case 0: {
+                
+                    isRunning = false;
+                    break;
+                }
+                default: {
+                    
+                    Display.clearScreen();
+            }
+            }
+        }
+    }
+    }
+
+
+
+

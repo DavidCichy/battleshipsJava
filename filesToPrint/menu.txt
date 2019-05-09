@@ -1,0 +1,11 @@
+1. P v P
+2. P v AI Easy
+3. P v AI Medium
+4. P v AI Hard
+5. AI v AI 
+6. M
+7. U
+8. A
+9. R
+10. M
+0. Go back

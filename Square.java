@@ -63,9 +63,9 @@ public class Square {
         } else if (this.state.equals("hit")){
             return "×";
         }else if (this.state.equals("miss")){
-            return "·";
-        }else if (this.state.equals("neighbor")){  // for tests only 
-            return "n";                            // to DELETE
+            return "Ø";
+        // }else if (this.state.equals("neighbor")){  // for tests only 
+        //     return "n";                            // to DELETE
         }
         else {
             return " ";
@@ -80,9 +80,9 @@ public class Square {
         } else if (this.state.equals("hit")){
             return "×";
         }else if (this.state.equals("miss")){
-            return "·";
-        }else if (this.state.equals("ship")){  // for tests only 
-            return "W";                            // to DELETE
+            return "Ø";
+        // }else if (this.state.equals("ship")){  // for tests only 
+            // return "W";                            // to DELETE
         }
         else {
             return " ";
