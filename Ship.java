@@ -18,7 +18,12 @@ public class Ship {
         for (int i = 0; i < this.shipPosition.length; i++){
             if (!this.shipPosition[i].isHit()){
                 this.sunk = false;
-            };}
+            }
+        if (this.sunk){
+            for (int j = 0; j < shipPosition.length; j++){
+                shipPosition[j].makeSunk();
+            }
+        };}
     }
 
     public boolean isSunk(){
