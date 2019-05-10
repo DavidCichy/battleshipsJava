@@ -286,7 +286,7 @@ public class Fleet {
                 if (!this.field[axisX][axisY].isShip() && !this.field[axisX][axisY].isNeigbor() &&
                 !this.field[axisX+1][axisY].isShip() && !this.field[axisX+1][axisY].isNeigbor() ) {
 
-                Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY]});
+                Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY]});
                 // markAsNeighbor();
                             addNeighbors(destroyer);
                 this.fleet[4]=destroyer;
@@ -299,7 +299,7 @@ public class Fleet {
                 if (
                 !this.field[axisX][axisY+1].isShip() && !this.field[axisX][axisY+1].isNeigbor()) {
 
-                Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2]});
+                Ship destroyer = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1]});
                 // markAsNeighbor();
                             addNeighbors(destroyer);
                 this.fleet[4]=destroyer;
