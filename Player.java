@@ -22,6 +22,7 @@ public class Player {
         }
 
         public void showBoard(Player opponent){
+            Display.showPlayerName(this.playerName, opponent.getName());
             Display.showBoards(this.playerOcean, opponent.getOcean  ());
         }
 

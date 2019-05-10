@@ -35,11 +35,11 @@ public class Fleet {
 
     }
 
-    private void makeNeighbors(){
-        for (Ship s: this.fleet){
-            addNeighbors(s);
-        }
-    }
+    // private void makeNeighbors(){
+    //     for (Ship s: this.fleet){
+    //         addNeighbors(s);
+    //     }
+    // }
 
     private int generateRandomInt(){
         Random random = new Random();
@@ -98,24 +98,17 @@ public class Fleet {
             if (axisX+4 <10 && axisY%2!=0) {
                 carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX+1][axisY], this.field[axisX+2][axisY], 
                                                       this.field[axisX+3][axisY], this.field[axisX+4][axisY]});                                          
-                // markAsNeighbor();
                 this.fleet[0]=carrier;
                 isWorking =false;
                 addNeighbors(carrier);
-                //return carrier;
             } else if (axisY+4 <10 && axisX%2!=0) {
                 carrier = new Ship(new Square[] {this.field[axisX][axisY], this.field[axisX][axisY+1], this.field[axisX][axisY+2], 
                     this.field[axisX][axisY+3], this.field[axisX][axisY+4]});
-                    // markAsNeighbor();
                 addNeighbors(carrier);
                     this.fleet[0]=carrier;
                     isWorking =false;
-                    //return carrier;
-                    // addNeighbors(carrier);
                 }  
             }
-            //this.isDestroyed = false;
-            
             return this.fleet;
         }
         

@@ -88,8 +88,8 @@ public class Square {
             return "▒";
         }else if (this.isMiss()){
             return "Ø";
-        }else if (this.state.equals("neighbor")){  // for tests only 
-            return "n";                            // to DELETE
+        // }else if (this.state.equals("neighbor")){  // for tests only 
+        //     return "n";                            // to DELETE
         }
         else {
             return " ";
@@ -105,8 +105,8 @@ public class Square {
             return "×";
         }else if (this.isMiss()){
             return "Ø";
-        // }else if (this.state.equals("ship")){  // for tests only 
-            // return "W";                            // to DELETE
+        }else if (this.state.equals("ship")){  // for tests only 
+            return "W";                            // to DELETE
         }
         else {
             return " ";

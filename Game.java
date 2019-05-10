@@ -8,6 +8,9 @@ public class Game {
     boolean gameContinues;
     Ai ai1;
     Ai ai2;
+    Ai1try ai1try1;
+    Ai1try ai1try2;
+
     
     public Game() throws IOException {
         
@@ -51,69 +54,72 @@ public class Game {
         this.player2 = new Player("Player 2", ocean2, fleet2);
         this.ai1 = new Ai("AI 1", ocean1, fleet1);
         this.ai2 = new Ai("AI 2", ocean2, fleet2);
+        this.ai1try1 = new Ai1try("NEW AI 1", ocean1, fleet1);
+        this.ai1try2 = new Ai1try("NEW AI 2", ocean2, fleet2);
+
 
     }
 
 
 
-    private void gamePvP() throws IOException {
-        creatorOfGameTable();
-        while (this.gameContinues){
-            playerRound(this.player1, this.player2);
-            updateState();
-            if(this.gameContinues){
-                playerRound(this.player2, this.player1);
-                updateState();
-            }
-        }
-    }
+    // private void gamePvP() throws IOException {
+    //     creatorOfGameTable();
+    //     while (this.gameContinues){
+    //         playerRound(this.player1, this.player2);
+    //         updateState();
+    //         if(this.gameContinues){
+    //             playerRound(this.player2, this.player1);
+    //             updateState();
+    //         }
+    //     }
+    // }
 
-    private void gamePvAIEasy() throws IOException {
-        creatorOfGameTable();
-        while (this.gameContinues){
-            playerRound(this.player1, this.ai2);
-            updateState();
-            if(this.gameContinues){
-                aiRoundEasy(this.ai2, this.player1,false);
-                updateState();
-            }
-        }
-    }
+    // private void gamePvAIEasy() throws IOException {
+    //     creatorOfGameTable();
+    //     while (this.gameContinues){
+    //         playerRound(this.player1, this.ai2);
+    //         updateState();
+    //         if(this.gameContinues){
+    //             aiRoundEasy(this.ai2, this.player1,false);
+    //             updateState();
+    //         }
+    //     }
+    // }
 
-    private void gamePvAIMedium() throws IOException {
-        creatorOfGameTable();
-        while (this.gameContinues){
-            playerRound(this.player1, this.ai2);
-            updateState();
-            if(this.gameContinues){
-                aiRoundMedium(this.ai2, this.player1,false);
-                updateState();
-            }
-        }
-    }
+    // private void gamePvAIMedium() throws IOException {
+    //     creatorOfGameTable();
+    //     while (this.gameContinues){
+    //         playerRound(this.player1, this.ai2);
+    //         updateState();
+    //         if(this.gameContinues){
+    //             aiRoundMedium(this.ai2, this.player1,false);
+    //             updateState();
+    //         }
+    //     }
+    // }
 
-    private void gamePvAIHard() throws IOException {
-        creatorOfGameTable();
-        while (this.gameContinues){
-            playerRound(this.player1, this.ai2);
-            updateState();
-            if(this.gameContinues){
-                aiRoundHard(this.ai2, this.player1,false);
-                updateState();
-            }
-        }
-    }
+    // private void gamePvAIHard() throws IOException {
+    //     creatorOfGameTable();
+    //     while (this.gameContinues){
+    //         playerRound(this.player1, this.ai2);
+    //         updateState();
+    //         if(this.gameContinues){
+    //             aiRoundHard(this.ai2, this.player1,false);
+    //             updateState();
+    //         }
+    //     }
+    // }
 
     private void gameSimulation() throws IOException {
         creatorOfGameTable();
         while (this.gameContinues){
             //aiRoundEasy(this.ai1, this.ai2);
-            aiRoundHard(this.ai1, this.ai2);        
+            aiRoundHard(this.ai1try1, this.ai1try2);        
             //playerRound(player1, player2);
             updateState();
             if(this.gameContinues){
                 //aiRoundEasy(this.ai2, this.ai1);
-                aiRoundHard(this.ai2, this.ai1);            
+                aiRoundHard(this.ai1try2, this.ai1try1);            
                 //playerRound(player2, player1);
                 updateState();
             }
@@ -123,7 +129,7 @@ public class Game {
     private void updateState(){
         if (this.player1.checkIfLost() || this.player2.checkIfLost()){
             this.gameContinues = false;
-        } else if (this.ai1.checkIfLost() || this.ai2.checkIfLost()){
+        } else if (this.ai1try1.checkIfLost() || this.ai1try2.checkIfLost()){
             this.gameContinues = false;
         }
     }
@@ -147,96 +153,96 @@ public class Game {
     //     playerRound(player1, player2);
     //     playerRound(player2, player1);
     // }
-    private void aiRoundEasy(Ai ai, Player oponent) throws IOException {
-        aiRoundEasy(ai, oponent, true);
-    }
+    // private void aiRoundEasy(Ai ai, Player oponent) throws IOException {
+    //     aiRoundEasy(ai, oponent, true);
+    // }
 
-    private void aiRoundMedium(Ai ai, Player oponent) throws IOException {
-        aiRoundMedium(ai, oponent, true);
-    }
+    // private void aiRoundMedium(Ai ai, Player oponent) throws IOException {
+    //     aiRoundMedium(ai, oponent, true);
+    // }
 
-    private void aiRoundHard(Ai ai, Player oponent) throws IOException {
-        aiRoundHard(ai, oponent, true);
+    private void aiRoundHard(Ai1try aiPlayer, Player oponent) throws IOException {
+        aiRoundHard(aiPlayer, oponent, true);
     }
     
-    private void aiRoundEasy(Ai ai, Player oponent, boolean showShips) throws IOException {
+    // private void aiRoundEasy(Ai ai, Player oponent, boolean showShips) throws IOException {
+    //     Display.clearScreen();
+    //     System.out.println("AI round.");
+    //     System.in.read();
+    //     Display.clearScreen();
+    //     if(showShips){
+    //     ai.showBoard(oponent);    }
+    //     ai.easyAiShot(oponent);
+    //     Display.clearScreen();
+    //     if(showShips){
+    //         ai.showBoard(oponent);    }
+    //     System.out.println("Press any key to continue or [x] to end this game ");
+    //         if (System.in.read()==120) {
+    //             endGame();
+    //         }
+
+    // }
+
+    // private void aiRoundMedium(Ai ai, Player oponent, boolean showShips) throws IOException {
+    //     Display.clearScreen();
+    //     System.out.println("AI round.");
+    //     System.in.read();
+    //     Display.clearScreen();
+    //     if(showShips){
+    //     ai.showBoard(oponent);}
+    //     ai.mediumAiShot(oponent);
+    //     if(showShips){
+    //     ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
+    //     Display.clearScreen();
+    //     if(showShips){
+    //     ai.showBoard(oponent);}
+    //     if(showShips){
+    //     ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
+    //     System.out.println("Press any key to continue or [x] to end this game ");
+    //         if (System.in.read()==120) {
+    //             endGame();
+    //         }
+
+    // }
+
+    private void aiRoundHard(Ai1try ai1try, Player oponent, boolean showShips) throws IOException {
         Display.clearScreen();
         System.out.println("AI round.");
         System.in.read();
         Display.clearScreen();
         if(showShips){
-        ai.showBoard(oponent);    }
-        ai.easyAiShot(oponent);
+        ai1try.showBoard(oponent);}
+        ai1try.easyAiShot(oponent);
+        // if(showShips){
+        // ai1try.showAiShotsTạble(ai1try.shotsTable, ai1try.shotsTable);}
         Display.clearScreen();
         if(showShips){
-            ai.showBoard(oponent);    }
-        System.out.println("Press any key to continue or [x] to end this game ");
-            if (System.in.read()==120) {
-                endGame();
-            }
-
-    }
-
-    private void aiRoundMedium(Ai ai, Player oponent, boolean showShips) throws IOException {
-        Display.clearScreen();
-        System.out.println("AI round.");
-        System.in.read();
-        Display.clearScreen();
-        if(showShips){
-        ai.showBoard(oponent);}
-        ai.mediumAiShot(oponent);
-        if(showShips){
-        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
-        Display.clearScreen();
-        if(showShips){
-        ai.showBoard(oponent);}
-        if(showShips){
-        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
-        System.out.println("Press any key to continue or [x] to end this game ");
-            if (System.in.read()==120) {
-                endGame();
-            }
-
-    }
-
-    private void aiRoundHard(Ai ai, Player oponent, boolean showShips) throws IOException {
-        Display.clearScreen();
-        System.out.println("AI round.");
-        System.in.read();
-        Display.clearScreen();
-        if(showShips){
-        ai.showBoard(oponent);}
-        ai.hardAiShot(oponent);
-        if(showShips){
-        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
-        Display.clearScreen();
-        if(showShips){
-        ai.showBoard(oponent);}
-        if(showShips){
-        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
+        ai1try.showBoard(oponent);}
+        // if(showShips){
+        // ai1try.showAiShotsTable(ai1try.shotsTable, ai1try.shotsTable);}
         System.out.println("Press any key to continue or [x] to end this game ");
         if (System.in.read()==120) {
             endGame();
         }
     }
 
-    private void playerRound(Player player, Player oponent) throws IOException {
-        Scanner scan = new Scanner(System.in);
-        Display.clearScreen();
-        System.out.println(player.getName() + " round. Press any key to continue.");
-        System.in.read();
-        Display.clearScreen();
-        player.showBoard(oponent);
-        int[] shootAt = readShootingParameters();
-        player.shotAtLocation(shootAt[0], shootAt[1], oponent);
-        Display.clearScreen();
-        player.showBoard(oponent);
-        System.out.println("Press any key to continue or [x] to end this game ");
-            if (System.in.read()==120) {
-                endGame();
-            }
-        // System.in.read();
-    }
+    // private void playerRound(Player player, Player oponent) throws IOException {
+    //     Scanner scan = new Scanner(System.in);
+    //     Display.clearScreen();
+    //     System.out.println(player.getName() + " round. Press any key to continue.");
+    //     System.in.read();
+    //     Display.clearScreen();
+    //     player.showBoard(oponent);
+    //     int[] shootAt = readShootingParameters();
+    //     player.shotAtLocation(shootAt[0], shootAt[1], oponent);
+    //     Display.clearScreen();
+    //     player.showBoard(oponent);
+    //     System.out.println("Press any key to continue or [x] to end this game ");
+    //         if (System.in.read()==120) {
+    //             endGame();
+    //         }
+    //     // System.in.read();
+    // }
 
 
     private int convertXParameter(char x){
@@ -247,17 +253,17 @@ public class Game {
         return y-1;
     }
 
-    private int[] readShootingParameters(){
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Column [A-J]: ");
-        String col = scan.next().toLowerCase();
-        System.out.print("Row 1-10:");
-        int row = scan.nextInt();
-        int x = convertXParameter(col.charAt(0));
-        System.out.println(x);
-        int y = convertYParameter(row);
-        return new int[] {x,y};
-    }
+    // private int[] readShootingParameters(){
+    //     Scanner scan = new Scanner(System.in);
+    //     System.out.print("Column [A-J]: ");
+    //     String col = scan.next().toLowerCase();
+    //     System.out.print("Row 1-10:");
+    //     int row = scan.nextInt();
+    //     int x = convertXParameter(col.charAt(0));
+    //     System.out.println(x);
+    //     int y = convertYParameter(row);
+    //     return new int[] {x,y};
+    // }
 
     private void gameRun() throws IOException {
         Scanner scan = new Scanner(System.in);
@@ -275,22 +281,22 @@ public class Game {
                 switch (scan.nextInt()) {
                 case 1: {
                     // creatorOfGameTable();
-                    gamePvP();
+                    // gamePvP();
                     break;
                 }
                 case 2: {
                     // creatorOfGameTable();
-                    gamePvAIEasy();
+                    // gamePvAIEasy();
                     break;
                 }
                 case 3: {
                     // creatorOfGameTable();
-                    gamePvAIMedium();
+                    // gamePvAIMedium();
                     break;
                 }
                 case 4: {
                     // creatorOfGameTable();
-                    gamePvAIHard();
+                    // gamePvAIHard();
                     break;
                 }
                 case 5: {
