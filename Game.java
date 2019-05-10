@@ -10,10 +10,6 @@ public class Game {
     Ai ai2;
     
     public Game() throws IOException {
-<<<<<<< Updated upstream
-    
-=======
->>>>>>> Stashed changes
         gameRun();
         
     }
@@ -199,17 +195,12 @@ public class Game {
         Display.clearScreen();
         if(showShips){
         ai.showBoard(oponent);}
-<<<<<<< Updated upstream
         if(showShips){
         ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
         System.out.println("Press any key to continue or [x] to end this game ");
         if (System.in.read()==120) {
             endGame();
         }
-=======
-        System.out.println("Press any key to continue");
-        System.in.read();
->>>>>>> Stashed changes
     }
 
     private void playerRound(Player player, Player oponent) throws IOException {
@@ -281,11 +272,7 @@ public class Game {
                     break;
                 }
                 case 5: {
-<<<<<<< Updated upstream
-                    gameSimulation();
-=======
                     gameSimulationEvsE();
->>>>>>> Stashed changes
                     
                     break;
                 }
@@ -301,16 +288,6 @@ public class Game {
                     
                     break;
                 }
-
-                case 9: {
-                    
-                    break;
-                }
-                case 10: {
-
-                    break;
-                }
-
                 case 0: {
                 
                     isRunning = false;
@@ -324,7 +301,3 @@ public class Game {
         }
     }
     }
-
-
-
-
