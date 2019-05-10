@@ -76,20 +76,16 @@ public void valueOfShotBeforeLast (int x, int y){
             this.x = a;
             this.y = b;
             shootDownUpRightLeft(opponent, this.x, this.y);
-            mediumAiShotRepeat(opponent);
         }   else if (xMemory >1 && xMemory <8 && yMemory>1 && yMemory<8 && opponent.getOcean().stateOfSquare(xMemory,yMemory).equals("hit")){
             this.x = this.xMemory;
             this.y = this.yMemory;
             shootDownUpRightLeft(opponent, this.x, this.y);
-            //mediumAiShotRepeat(opponent);
-
         }
 
       } else if (xMemory >1 && xMemory <8 && yMemory>1 && yMemory<8 && opponent.getOcean().stateOfSquare(xMemory,yMemory).equals("hit")){
         int x = this.xMemory;
         int y = this.yMemory;
         shootDownUpRightLeft(opponent, x, y);
-        mediumAiShotRepeat(opponent);
       } else {
          int x = (int )(Math.random() * 10);
          int y = (int )(Math.random() * 10);
@@ -100,9 +96,6 @@ public void valueOfShotBeforeLast (int x, int y){
         shotAtLocation(x, y, opponent);
         valueOfShotBeforeLast (x,y);
         markActionInShootTable(x,y,opponent);
-        mediumAiShotRepeat(opponent);
-
-        //}
     }
   }
 
@@ -124,28 +117,24 @@ public void valueOfShotBeforeLast (int x, int y){
       if (opponent.getOcean().wasItShot(x, y+1)==false){
         x += 0;
         y += 1; //w dół
-        //shotAtLocation(x, y, opponent);
         easyShot(x,y,opponent);
         valueOfShotBeforeLast (x,y);
         markActionInShootTable(x,y,opponent);
       } else if (opponent.getOcean().wasItShot(x, y-1)==false) {
         x += 0;
         y -= 1; //w góre
-        //shotAtLocation(x, y, opponent);
         easyShot(x,y,opponent);
         valueOfShotBeforeLast (x,y);
         markActionInShootTable(x,y,opponent);
       } else if (opponent.getOcean().wasItShot(x+1, y)==false) {
         x += 1;
         y += 0; //w prawo
-        //shotAtLocation(x, y, opponent);
         easyShot(x,y,opponent);
         valueOfShotBeforeLast (x,y);
         markActionInShootTable(x,y,opponent);
       } else if (opponent.getOcean().wasItShot(x-1, y)==false) {
         x -= 1; //w lewo
         y += 0;  
-        //shotAtLocation(x, y, opponent);
         easyShot(x,y,opponent);
         valueOfShotBeforeLast (x,y);
         markActionInShootTable(x,y,opponent);

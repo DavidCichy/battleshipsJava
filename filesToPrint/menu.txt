@@ -2,10 +2,10 @@
 2. P v AI Easy
 3. P v AI Medium
 4. P v AI Hard
-5. AI v AI 
-6. M
-7. U
-8. A
+5. AI Easy vs AI Easy
+6. AI Medium vs Ai Medium
+7. AI Hard vs Ai Hard
+8. Choose: Which AI vs Which AI
 9. R
 10. M
 0. Go back

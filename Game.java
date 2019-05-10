@@ -10,7 +10,10 @@ public class Game {
     Ai ai2;
     
     public Game() throws IOException {
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
         gameRun();
         
     }
@@ -86,17 +89,39 @@ public class Game {
         }
     }
 
-    private void gameSimulation() throws IOException {
+    private void gameSimulationEvsE() throws IOException {
         creatorOfGameTable();
         while (this.gameContinues){
-            //aiRoundEasy(this.ai1, this.ai2);
-            aiRoundHard(this.ai1, this.ai2);        
-            //playerRound(player1, player2);
+            aiRoundEasy(this.ai1, this.ai2);
             updateState();
             if(this.gameContinues){
-                //aiRoundEasy(this.ai2, this.ai1);
+                aiRoundEasy(this.ai2, this.ai1);
+                updateState();
+            }
+        }
+    }
+
+
+    private void gameSimulationMvsM() throws IOException {
+        creatorOfGameTable();
+        while (this.gameContinues){
+            aiRoundMedium(this.ai1, this.ai2);        
+            updateState();
+            if(this.gameContinues){
+                aiRoundMedium(this.ai2, this.ai1);            
+                updateState();
+            }
+        }
+    }
+
+
+    private void gameSimulationHvsH() throws IOException {
+        creatorOfGameTable();
+        while (this.gameContinues){
+            aiRoundHard(this.ai1, this.ai2);        
+            updateState();
+            if(this.gameContinues){
                 aiRoundHard(this.ai2, this.ai1);            
-                //playerRound(player2, player1);
                 updateState();
             }
         }
@@ -153,13 +178,9 @@ public class Game {
         if(showShips){
         ai.showBoard(oponent);}
         ai.mediumAiShot(oponent);
-        if(showShips){
-        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
         Display.clearScreen();
         if(showShips){
         ai.showBoard(oponent);}
-        if(showShips){
-        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
         System.out.println("Press any key to continue or [x] to end this game ");
             if (System.in.read()==120) {
                 endGame();
@@ -175,17 +196,20 @@ public class Game {
         if(showShips){
         ai.showBoard(oponent);}
         ai.hardAiShot(oponent);
-        if(showShips){
-        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
         Display.clearScreen();
         if(showShips){
         ai.showBoard(oponent);}
+<<<<<<< Updated upstream
         if(showShips){
         ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
         System.out.println("Press any key to continue or [x] to end this game ");
         if (System.in.read()==120) {
             endGame();
         }
+=======
+        System.out.println("Press any key to continue");
+        System.in.read();
+>>>>>>> Stashed changes
     }
 
     private void playerRound(Player player, Player oponent) throws IOException {
@@ -257,16 +281,20 @@ public class Game {
                     break;
                 }
                 case 5: {
+<<<<<<< Updated upstream
                     gameSimulation();
+=======
+                    gameSimulationEvsE();
+>>>>>>> Stashed changes
                     
                     break;
                 }
                 case 6: {
-                
+                    gameSimulationMvsM();
                     break;
                 }
                 case 7: {
-                    
+                    gameSimulationHvsH();
                     break;
                 }
                 case 8: {
