@@ -214,8 +214,10 @@ public class Game {
         ai.showBoard(oponent);}
         if(showShips){
         ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
-        System.out.println("Press any key to continue");
-        System.in.read();
+        System.out.println("Press any key to continue or [x] to end this game ");
+        if (System.in.read()==120) {
+            endGame();
+        }
     }
 
     private void playerRound(Player player, Player oponent) throws IOException {
