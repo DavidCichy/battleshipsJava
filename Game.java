@@ -10,25 +10,7 @@ public class Game {
     Ai ai2;
     
     public Game() throws IOException {
-        
-        // this.field1= new Square[10][10];
-        // this.field2= new Square[10][10];
-        // for (int x = 0; x<10; x++){
-        //     for (int y = 0; y<10; y++){
-        //         this.field1[x][y] = new Square(x, y);
-        //         this.field2[x][y] = new Square(x, y);
-        //     }
-        // }
-        // Ocean ocean1 = new Ocean(field1);
-        // Ocean ocean2 = new Ocean(field2);
-        // Fleet fleet1 = new Fleet(field1);
-        // Fleet fleet2 = new Fleet(field2);
-        // this.gameContinues = true;
-        // this.player1 = new Player("Player 1", ocean1, fleet1);
-        // this.player2 = new Player("Player 2", ocean2, fleet2);
-        // this.ai1 = new Ai("AI 1", ocean1, fleet1);
-        // this.ai2 = new Ai("AI 2", ocean2, fleet2);
-        // creatorOfGameTable();
+    
         gameRun();
         
     }
@@ -132,21 +114,7 @@ public class Game {
         this.gameContinues = false;
         
     }
-    // private void playerTurn(Player player, Player oponent) throws IOException {
-    //     this.player1 = new Player(ocean1, fleet1);
-    //     this.player2 = new Player(ocean2, fleet2);
-    //     // this.ai1 = new Ai(ocean1, fleet1);
-    //     // this.ai2 = new Ai(ocean2, fleet2);
 
-    //     //aiRoundEasy(ai1,ai2);
-    //     //aiRoundEasy(ai2,ai1);
-    //     playerRound(player1, player2);
-    //     playerRound(player2, player1);
-    //     playerRound(player1, player2);
-    //     playerRound(player2, player1);
-    //     playerRound(player1, player2);
-    //     playerRound(player2, player1);
-    // }
     private void aiRoundEasy(Ai ai, Player oponent) throws IOException {
         aiRoundEasy(ai, oponent, true);
     }
@@ -235,7 +203,6 @@ public class Game {
             if (System.in.read()==120) {
                 endGame();
             }
-        // System.in.read();
     }
 
 
@@ -267,7 +234,6 @@ public class Game {
         while (isRunning) {
                 Display.clearScreen();
             Scanner scan = new Scanner(System.in);
-                // Display.clearScreen();
                 Display.showMenu().forEach(System.out::println);
                 
                 System.out.println("Choose an option");
@@ -275,27 +241,22 @@ public class Game {
                 
                 switch (scan.nextInt()) {
                 case 1: {
-                    // creatorOfGameTable();
                     gamePvP();
                     break;
                 }
                 case 2: {
-                    // creatorOfGameTable();
                     gamePvAIEasy();
                     break;
                 }
                 case 3: {
-                    // creatorOfGameTable();
                     gamePvAIMedium();
                     break;
                 }
                 case 4: {
-                    // creatorOfGameTable();
                     gamePvAIHard();
                     break;
                 }
                 case 5: {
-                    // creatorOfGameTable();
                     gameSimulation();
                     
                     break;

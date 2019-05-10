@@ -58,7 +58,5 @@ public class Ship {
         return isHit;
     }
 
-    // public Square[] squareList(){
-    //     return shipPosition;
-    // }
+   
 }

@@ -2,17 +2,12 @@ public class Square {
     private String state;
     private int x;
     private int y;
-    //(ship, ocean, miss, hit, neighbor, sank)
     public Square(int x, int y){
         this.state = "ocean";
         this.x = y;
         this.y = x;
     }
     
-    // public String getStatus(){
-    //     return this.state;
-    // }
-
     
     public void makeShip(){
         if (this.state.equals("ocean")){
@@ -86,8 +81,6 @@ public class Square {
             return "▒";
         }else if (this.isMiss()){
             return "Ø";
-        }else if (this.state.equals("neighbor")){  // for tests only 
-            return "n";                            // to DELETE
         }
         else {
             return " ";
@@ -96,15 +89,12 @@ public class Square {
     }
 
     public String showStatusToOponent() {
-        //(ship,hit,sunk, ocean, miss,  neighbor, )
         if (this.isSunk()){
             return "▒";
         } else if (this.isHit()){
             return "×";
         }else if (this.isMiss()){
             return "Ø";
-        // }else if (this.state.equals("ship")){  // for tests only 
-            // return "W";                            // to DELETE
         }
         else {
             return " ";

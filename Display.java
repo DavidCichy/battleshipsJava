@@ -42,8 +42,15 @@ public class Display {
         System.out.flush();
     }
 
+    public static void showPlayerName(String ownerName, String oponentName) {
+
+        String names= String.format("%45s","              " + ownerName + "                                                "+ oponentName +"\n");
+        System.out.printf(names);
+        System.out.println("\n");
+    }
 
     public static void showBoards(Ocean ownerOcean, Ocean oponentOcean){
+        
         String abc = String.format("%45s","     A   B   C   D   E   F   G   H   I   J            A   B   C   D   E   F   G   H   I   J  \n");
         System.out.printf(abc);
 
