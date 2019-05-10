@@ -79,12 +79,12 @@ public class Game {
     private void gameSimulation() throws IOException {
         while (this.gameContinues){
             //aiRoundEasy(this.ai1, this.ai2);
-            aiRoundMedium(this.ai1, this.ai2);        
+            aiRoundHard(this.ai1, this.ai2);        
             //playerRound(player1, player2);
             updateState();
             if(this.gameContinues){
                 //aiRoundEasy(this.ai2, this.ai1);
-                aiRoundMedium(this.ai2, this.ai1);            
+                aiRoundHard(this.ai2, this.ai1);            
                 //playerRound(player2, player1);
                 updateState();
             }
@@ -120,6 +120,10 @@ public class Game {
 
     private void aiRoundMedium(Ai ai, Player oponent) throws IOException {
         aiRoundMedium(ai, oponent, true);
+    }
+
+    private void aiRoundHard(Ai ai, Player oponent) throws IOException {
+        aiRoundHard(ai, oponent, true);
     }
     
     private void aiRoundEasy(Ai ai, Player oponent, boolean showShips) throws IOException {
@@ -159,7 +163,22 @@ public class Game {
     }
 
     private void aiRoundHard(Ai ai, Player oponent, boolean showShips) throws IOException {
-
+        Display.clearScreen();
+        System.out.println("AI round.");
+        System.in.read();
+        Display.clearScreen();
+        if(showShips){
+        ai.showBoard(oponent);}
+        ai.hardAiShot(oponent);
+        if(showShips){
+        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
+        Display.clearScreen();
+        if(showShips){
+        ai.showBoard(oponent);}
+        if(showShips){
+        ai.showAiShotsTable(ai.shotsTable, ai.shotsTable);}
+        System.out.println("Press any key to continue");
+        System.in.read();
     }
 
     private void playerRound(Player player, Player oponent) throws IOException {

@@ -8,16 +8,28 @@ public class Ai extends Player{
   private String hit = "x";
   private String sunk = "u";
   private static Scanner in;
+  private int x;
+  private int y; 
   private int xMemory = 0;
   private int yMemory = 0;  
+  private int xBeforeLast = 0;
+  private int yBeforeLast = 0; 
   public String[][] shotsTable;
-  int[][] lastFiveShots = new int[1][5];
+  private int turn=1;
 
     public Ai(String name, Ocean playerOcean, Fleet playerFleet){
       super(name, playerOcean, playerFleet);
       this.shotsTable = new String[10][10];
       makeShootTable();
     }
+
+public void valueOfShotBeforeLast (int x, int y){
+  this.xBeforeLast = this.xMemory;
+  this.yBeforeLast = this.yMemory; 
+  this.xMemory =x;
+  this.yMemory =y;  
+  
+}
 
     public void makeShootTable(){
       for (int x = 0; x<10; x++){
@@ -38,90 +50,117 @@ public class Ai extends Player{
         y = (int )(Math.random() * 10);
       }
       shotAtLocation(x, y, opponent);
+    
+      this.xMemory = x;
+      this.yMemory= y;
+
     }
+
 
     private String showStatus(int xMemory, int yMemory) {
       String status = this.shotsTable[yMemory][xMemory];
       return status;
     }
 
+    public void mediumAiShotRepeat(Player opponent){
+      if (opponent.getOcean().stateOfSquare(xMemory,yMemory).equals("hit")){
+      mediumAiShot(opponent);
+    }}
+
+
     public void mediumAiShot(Player opponent){
-  //    if (xMemory >0 && xMemory <9 && yMemory>0 && yMemory<9 || showStatus(xMemory,yMemory).equals(hit)){
-  //     
-  //          int x = xMemory;
-  //          int y = yMemory;
-  //        if (opponent.getOcean().wasItShot(x, y+1)==false){
-  //          x += 0;
-  //          y += 1; //w prawo
-  //          //shotAtLocation(x, y, opponent);
-  //          easyShot(x,y,opponent);
-  //          partOfMediumAi(x,y,opponent);
-  //        } else if (opponent.getOcean().wasItShot(x, y-1)==false) {
-  //          x += 0;
-  //          y -= 1; //w lewo
-  //          //shotAtLocation(x, y, opponent);
-  //          easyShot(x,y,opponent);
-  //          partOfMediumAi(x,y,opponent);
-  //        } else if (opponent.getOcean().wasItShot(x+1, y)==false) {
-  //          x += 1;
-  //          y += 0; //w dół
-  //          //shotAtLocation(x, y, opponent);
-  //          easyShot(x,y,opponent);
-  //          partOfMediumAi(x,y,opponent);
-  //        } else if (opponent.getOcean().wasItShot(x-1, y)==false) {
-  //          x -= 1; //w górę
-  //          y += 0;  
-  //          //shotAtLocation(x, y, opponent);
-  //          easyShot(x,y,opponent);
-  //          partOfMediumAi(x,y,opponent);
-  //        }
-  //      
-//
-  //    } else {
+      int a = this.xBeforeLast;
+      int b = this.yBeforeLast;
+      if (a >1 && a <8 && b>1 && b<8 && opponent.getOcean().stateOfSquare(a,b).equals("hit")){
+            if (xMemory >1 && xMemory <8 && yMemory>1 && yMemory<8 && opponent.getOcean().stateOfSquare(xMemory,yMemory).equals("miss")){
+            this.x = a;
+            this.y = b;
+            shootDownUpRightLeft(opponent, this.x, this.y);
+            mediumAiShotRepeat(opponent);
+        }   else if (xMemory >1 && xMemory <8 && yMemory>1 && yMemory<8 && opponent.getOcean().stateOfSquare(xMemory,yMemory).equals("hit")){
+            this.x = this.xMemory;
+            this.y = this.yMemory;
+            shootDownUpRightLeft(opponent, this.x, this.y);
+            //mediumAiShotRepeat(opponent);
 
+        }
 
-
-        int x = (int )(Math.random() * 10);
-        int y = (int )(Math.random() * 10);
-      while (!this.shotsTable[y][x].equals(noShot)){
+      } else if (xMemory >1 && xMemory <8 && yMemory>1 && yMemory<8 && opponent.getOcean().stateOfSquare(xMemory,yMemory).equals("hit")){
+        int x = this.xMemory;
+        int y = this.yMemory;
+        shootDownUpRightLeft(opponent, x, y);
+        mediumAiShotRepeat(opponent);
+      } else {
+         int x = (int )(Math.random() * 10);
+         int y = (int )(Math.random() * 10);
+      while (opponent.getOcean().wasItShot(x, y)==true){
         x = (int )(Math.random() * 10);
         y = (int )(Math.random() * 10);
       }
         shotAtLocation(x, y, opponent);
-        if (opponent.getOcean().stateOfSquare(x,y).equals("hit")){
-          this.shotsTable[y][x] = hit;}
-        else if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
-          this.shotsTable[y][x] = miss;}
-          markAsNotShootThere(opponent);
-          markAsNeighborQuartersNearHit();
-          shotToQuartersAfterHit(opponent);
-          this.xMemory = x;
-          this.yMemory = y;
+        valueOfShotBeforeLast (x,y);
+        markActionInShootTable(x,y,opponent);
+        mediumAiShotRepeat(opponent);
 
-    //    }
+        //}
     }
+  }
 
-    public void partOfMediumAi(int x, int y, Player opponent){
-      if (opponent.getOcean().stateOfSquare(x,y).equals("hit")){
-        this.shotsTable[y][x] = hit;}
-      else if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
-        this.shotsTable[y][x] = miss;}
+    public void markActionInShootTable(int x, int y, Player opponent){
         markAsNotShootThere(opponent);
         markAsNeighborQuartersNearHit();
+        shotToQuartersAfterHit(opponent);
         this.xMemory = x;
         this.yMemory = y;
     }
 
     public void hardAiShot(Player opponent){
+      mediumAiShot(opponent);
+      mediumAiShot(opponent);
+
+}
+
+    public void shootDownUpRightLeft(Player opponent, int x, int y){
+      if (opponent.getOcean().wasItShot(x, y+1)==false){
+        x += 0;
+        y += 1; //w dół
+        //shotAtLocation(x, y, opponent);
+        easyShot(x,y,opponent);
+        valueOfShotBeforeLast (x,y);
+        markActionInShootTable(x,y,opponent);
+      } else if (opponent.getOcean().wasItShot(x, y-1)==false) {
+        x += 0;
+        y -= 1; //w góre
+        //shotAtLocation(x, y, opponent);
+        easyShot(x,y,opponent);
+        valueOfShotBeforeLast (x,y);
+        markActionInShootTable(x,y,opponent);
+      } else if (opponent.getOcean().wasItShot(x+1, y)==false) {
+        x += 1;
+        y += 0; //w prawo
+        //shotAtLocation(x, y, opponent);
+        easyShot(x,y,opponent);
+        valueOfShotBeforeLast (x,y);
+        markActionInShootTable(x,y,opponent);
+      } else if (opponent.getOcean().wasItShot(x-1, y)==false) {
+        x -= 1; //w lewo
+        y += 0;  
+        //shotAtLocation(x, y, opponent);
+        easyShot(x,y,opponent);
+        valueOfShotBeforeLast (x,y);
+        markActionInShootTable(x,y,opponent);
+      }
     }
 
     private void markAsNotShootThere(Player opponent){
       for (Integer x = 0; x<10; x++){
           for (Integer y = 0; y<10; y++){
-            if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
-            this.shotsTable[y][x]=miss;
+            if (opponent.getOcean().stateOfSquare(x,y).equals("hit")){
+              this.shotsTable[y][x] = hit;
+            }else if(opponent.getOcean().stateOfSquare(x,y).equals("miss")){
+              this.shotsTable[y][x] = miss;
           } else if(opponent.getOcean().stateOfSquare(x,y).equals("sunk")){
-            this.shotsTable[y][x]=miss;
+            this.shotsTable[y][x]=hit;
           }
         }
       }
@@ -130,7 +169,7 @@ public class Ai extends Player{
     private void shotToQuartersAfterHit(Player opponent){
       for (Integer x = 0; x<10; x++){
         for (Integer y = 0; y<10; y++){
-          if(this.shotsTable[y][x]==neighbour){
+          if(this.shotsTable[y][x].equals(this.neighbour)){
           opponent.getOcean().markSquare(x, y);
         } 
     }
@@ -181,7 +220,7 @@ public class Ai extends Player{
       }}
     }
       
-public static void showAiShotsTable(String[][] shotsTable, String[][] shotsTablee){
+public void showAiShotsTable(String[][] shotsTable, String[][] shotsTablee){
         String abc = String.format("%45s","     A   B   C   D   E   F   G   H   I   J            A   B   C   D   E   F   G   H   I   J  \n");
         System.out.printf(abc);
 
@@ -214,15 +253,11 @@ public static void showAiShotsTable(String[][] shotsTable, String[][] shotsTable
         }
         String line4 = String.format("%45s","   └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘        └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘\n");
         System.out.printf(line4);
+        System.out.println("Last "+xMemory+" "+yMemory);
+        System.out.println("BeforeLast "+this.xBeforeLast+" "+this.yBeforeLast);
+        turn +=1;
+        System.out.println("Tura "+turn);
+
 }
 
-//  public static String[] addNewShotToMemory (int[][] lastFiveShots, int character) {  
-//    int[][] newList = new int[lastFiveShots.length + 1];
-//    for(int i = 0; i < lastFiveShots.length; i++)
-//    newList[i] = lastFiveShots[i];
-//    newList[newList.length - 1] = character;
-//    lastFiveShots = newList;
-//    return lastFiveShots;
-//
-//}
 }
