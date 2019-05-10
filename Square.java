@@ -5,8 +5,8 @@ public class Square {
     //(ship, ocean, miss, hit, neighbor, sank)
     public Square(int x, int y){
         this.state = "ocean";
-        this.x = x;
-        this.y = y;
+        this.x = y;
+        this.y = x;
     }
     
     // public String getStatus(){
@@ -45,9 +45,7 @@ public class Square {
     }
     
     public void makeMissFromNeighbor(){
-        if (this.isNeigbor()){
             this.state = "miss";
-        }
     }
     
     public boolean isNeigbor(){

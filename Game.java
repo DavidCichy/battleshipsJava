@@ -260,13 +260,14 @@ public class Game {
     }
 
     private void gameRun() throws IOException {
-        Scanner scan = new Scanner(System.in);
-
+        
         boolean isRunning = true;
-       
-
+        
+        
         while (isRunning) {
                 Display.clearScreen();
+            Scanner scan = new Scanner(System.in);
+                // Display.clearScreen();
                 Display.showMenu().forEach(System.out::println);
                 
                 System.out.println("Choose an option");

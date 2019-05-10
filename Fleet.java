@@ -72,8 +72,8 @@ public class Fleet {
         for (Square s: shipPosition){
             for (Square[] g: this.field){
                 for (Square f: g){
-                if (checkIfSquareIsNeightbor(f, s) && !Arrays.asList(shipPosition).contains(f) && !shipNeightbor.contains(f)){
-                    shipNeightbor.add(f);
+                    if (checkIfSquareIsNeightbor(f, s) && !Arrays.asList(shipPosition).contains(f) && !shipNeightbor.contains(f)){
+                        shipNeightbor.add(f);
             }}
         }
     }
