@@ -212,7 +212,7 @@ public class Game {
         Display.clearScreen();
         if(showShips){
         ai1try.showBoard(oponent);}
-        ai1try.easyAiShot(oponent);
+        ai1try.newAi1tryShot(oponent);
         // if(showShips){
         // ai1try.showAiShotsTạble(ai1try.shotsTable, ai1try.shotsTable);}
         Display.clearScreen();
@@ -245,13 +245,13 @@ public class Game {
     // }
 
 
-    private int convertXParameter(char x){
-        return Character.getNumericValue(x)-10;
-    }
+    // private int convertXParameter(char x){
+    //     return Character.getNumericValue(x)-10;
+    // }
 
-    private int convertYParameter(int y){
-        return y-1;
-    }
+    // private int convertYParameter(int y){
+    //     return y-1;
+    // }
 
     // private int[] readShootingParameters(){
     //     Scanner scan = new Scanner(System.in);
